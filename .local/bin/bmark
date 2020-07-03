@@ -1,0 +1,11 @@
+#!/bin/sh
+
+## Set Browser to open bookmarks
+export BROWSER="qutebrowser"
+
+## Lists all tags and pipe them into dmenu
+TAGS="$( buku --np -t | awk 'gsub( /\(|\)$/, "" ) { $1 = $NF; $NF = ""; print }' | dmenu -i -p 'Select tag:' | awk '{print $NF}' )"
+ 
+## Chosen a tag, lists all BookMarks in dmenu with that tag and open the output
+BM="$( buku -p -f 5 | awk -v tags="$TAGS" '$NF ~ tags {$NF=""; print $0}' | dmenu -i -l 30 -p 'Select bookmark' | cut -d ' ' -f 1 | setsid --fork nohup xargs -r buku -o > /dev/null )" 
+

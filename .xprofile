@@ -1,0 +1,6 @@
+xcompmgr -c &		# xcompmgr for transparency
+xrdb .Xdefaults &	# Set st configuration
+wal -R			# Color Scheme - Pywal
+
+# Set Wallpaper
+xwallpaper --center ~/.config/wallpaper.jpg

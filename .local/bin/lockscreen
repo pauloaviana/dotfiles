@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#Take screenshot
+scrot -z -o /tmp/screen.png
+
+#Image composition
+[[ -f ~/.config/scripts/images/symbol.png ]] &&
+convert /tmp/screen.png -paint 1 -swirl 160 ~/.local/share/images/symbol.png -gravity center -composite -matte /tmp/screen.png
+
+#Locking the screen
+i3lock -e -f -i /tmp/screen.png

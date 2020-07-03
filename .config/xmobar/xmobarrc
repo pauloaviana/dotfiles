@@ -1,0 +1,39 @@
+-- http://projects.haskell.org/xmobar/
+-- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
+
+Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting=true, Font Awesome 5 Free Solid:size=11"
+       , additionalFonts = [ "xft:Font Awesome 5 Free Solid:size=9" ] --Required to use the font on the bar regardless of the StdinReader output
+       , bgColor = "#090806"
+       , fgColor = "#758760"
+       , position = Top
+       , lowerOnStart = True
+       , hideOnStart = False
+       , allDesktops = True
+       , persistent = True
+       , iconRoot = "/home/paulo/.config/xmobar/xpm" -- default: "."
+       , commands = [ Run Date "%a, %b %d %Y, %H:%M" "date" 10
+                    , Run Wireless "wlp3s0" ["-t", "[<quality>]"] 10
+                    --, Run Network "enp0s25" ["-t", "LAN [<rxbar>|<txbar>"] 10
+                    , Run Volume "default" "Master" ["-t", "[<volume>%|<volumebar>]"] 5
+                    , Run Com "/home/paulo/.local/bin/updates-arch.sh" [""] "arch" 3600
+                    , Run Com "/home/paulo/.local/bin/updates-arch-aur.sh" [""] "aur" 3600
+                    , Run Cpu ["-t", "[<total>%]","-H","50","--high","red"] 10
+                    , Run Memory ["-t", "[<used>/<total>]"] 10
+                    , Run DiskU [("/", "[<free>]")] [] 3600
+                    , Run UnsafeStdinReader
+                    , Run Battery ["-t", "<acstatus>", "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o"	, "<icon=battery_off.xpm/> [<left>%] (<timeleft>)"
+                                       -- AC "on" status
+                                       , "-O"	, "<icon=battery_charging.xpm/> <fc=#F0C674>[<left>%]</fc>"
+                                       -- charged status
+                                       , "-i"	, "<icon=battery_full.xpm/> <fc=#F0C674>[FULL]</fc>"
+                             ] 50
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "  %UnsafeStdinReader% }{ <fc=#A58F66>|</fc> <fc=#C3A369><fn=1> </fn>%arch%</fc> <fc=#C3A369>%aur%</fc> <fc=#A58F66>|</fc> <fc=#C3E88D><fn=1> </fn>%default:Master%</fc>   <fc=#FFB86C><fn=1> </fn>%cpu%</fc>   <fc=#F18A85><fn=1> </fn>%memory%</fc>   <fc=#82AAFF><fn=1> </fn>%disku%</fc>   <fc=#D4A4C6><fn=1> </fn>%wlp3s0wi%</fc>   <fc=#F0C674>%battery%</fc>   <fc=#D4D5DF>%date%</fc>  "
+       }
+
+-- To call a .xpm file, use <icon=$FILE_NAME.xpm/>
+-- To use the Font Awesome on the bar, use <fn=1>$GLYPH</fn>, where $GLYPH is the font glyph
