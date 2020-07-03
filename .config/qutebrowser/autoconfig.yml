@@ -61,6 +61,7 @@ settings:
     '*://*.framagit.org/*': false
     '*://*.github.com/*': true
     '*://*.gitlab.com/*': true
+    '*://*.leanprover-community.github.io/*': true
     '*://*.mail.protonmail.com/*': true
     '*://*.mediabiasfactcheck.com/*': false
     '*://*.searx.tuxcloud.net/*': true

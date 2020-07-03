@@ -229,10 +229,10 @@ mySpaces = [
          "1: \xf07b ", --System
          "2: \xf0ac ", --Web
          "3: \xf02d ", --Read
-         "4: \xf144 ", --Video
+         "4: \xf0f4 ", --Extra
          "5: \xf1fa ", --Chat
-         "6: \xf0f4 ", --Extra
-         "7: \xf11b ", --Game
+         "6: \xf11b ", --Game
+         "7: \xf144 ", --Video
          "8: \xf001 ", --Music
          "9: \xf019 "  --Sync
            ] -- Using Font Awesome
@@ -255,12 +255,12 @@ myManageHook = composeAll
       , className =? "Tor Browser"       --> doShift (mySpaces !! 1)
       , className =? "qutebrowser"       --> viewShift (mySpaces !! 1)
       , title =? "newsboat"              --> doShift (mySpaces !! 2)
-      , className =? "mpv"               --> viewShift (mySpaces !! 3)
+      , className =? "Emacs"             --> viewShift (mySpaces !! 3)
       , title =? "neomutt"               --> doShift (mySpaces !! 4)
       , className =? "Zulip"             --> doShift (mySpaces !! 4)
       , className =? "discord"           --> doShift (mySpaces !! 4)
-      , className =? "Emacs"             --> viewShift (mySpaces !! 5)
-      , className =? "Steam"             --> doShift (mySpaces !! 6)
+      , className =? "Steam"             --> doShift (mySpaces !! 5)
+      , className =? "mpv"               --> viewShift (mySpaces !! 6)
       , className =? "qBittorrent"       --> doShift (mySpaces !! 8)
      ] <+> namedScratchpadManageHook myScratchPads
         where viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -268,9 +268,9 @@ myManageHook = composeAll
 ------------------------------------------------------------------------
 ---LAYOUTS
 
-myLayout = onWorkspace (mySpaces !! 3) monocle $
+myLayout = onWorkspace (mySpaces !! 6) monocle $
          avoidStruts $ smartBorders $ mouseResize $ windowArrange $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ 
-           onWorkspaces [(mySpaces !! 1), (mySpaces !! 5)] monocle $        
+           onWorkspaces [(mySpaces !! 1), (mySpaces !! 3)] monocle $        
            myDefaultLayout
              where 
                  myDefaultLayout = mkToggle (single MIRROR) (tall ||| monocle ||| threeCol ||| grid)
