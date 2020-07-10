@@ -57,16 +57,15 @@ settings:
   content.cookies.store:
     global: true
   content.javascript.enabled:
-    '*://*.coq.inria.fr/*': false
-    '*://*.framagit.org/*': false
+    '*://*.duckduckgo.com/*': true
     '*://*.github.com/*': true
     '*://*.gitlab.com/*': true
     '*://*.leanprover-community.github.io/*': true
     '*://*.mail.protonmail.com/*': true
-    '*://*.mediabiasfactcheck.com/*': false
+    '*://*.runbox.com/*': true
+    '*://*.rutracker.org/*': true
     '*://*.searx.tuxcloud.net/*': true
     '*://*.settings/*': true
-    '*://*.www.britannica.com/*': false
     '*://*.www.protondb.com/*': true
     '*://*.www.reddit.com/*': true
     '*://*.www.youtube.com/*': true
@@ -94,10 +93,10 @@ settings:
     global: last-focused
   prompt.filebrowser:
     global: true
-  statusbar.hide:
-    global: true
   statusbar.position:
     global: top
+  statusbar.show:
+    global: never
   statusbar.widgets:
     global:
     - url

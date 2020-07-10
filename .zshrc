@@ -25,11 +25,11 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-#Temporary Aliases
-alias ytc="cd ~/videos/Curvas ; youtube-dl --playlist-start 14 'https://www.youtube.com/playlist?list=PLo4jXE-LdDTSvn9evqkXf8mii9Q_w1nyX'"
+alias mt="cd ~/videos/Measure ; youtube-dl --playlist-start 17 'https://www.youtube.com/playlist?list=PLo4jXE-LdDTQq8ZyA8F8reSQHej3F6RFX'"
+alias ll="cd ~/videos/lean/summer ; youtube-dl 'https://www.youtube.com/playlist?list=PLVZep5wTamMmvdvczjrLctDM9T4nBse1M'"
 
 # ALIASES
-alias md='sudo mount /dev/sdb1 /mnt'
+alias md='sudo mount /dev/sdc1 /mnt'
 alias umd='sudo umount /mnt'
 alias ls='ls --color=auto'
 alias li='ls -1sh --color=auto'
