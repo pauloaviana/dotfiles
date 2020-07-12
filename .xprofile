@@ -3,4 +3,4 @@ xrdb .Xdefaults &	# Set st configuration
 wal -R			# Color Scheme - Pywal
 
 # Set Wallpaper
-xwallpaper --zoom ~/images/wallpapers/japanese/geisha.jpg
+xwallpaper --zoom ~/.config/wallpaper.jpg
