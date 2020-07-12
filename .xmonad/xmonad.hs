@@ -81,16 +81,17 @@ main = do
         , normalBorderColor  = color0
         , focusedBorderColor = color2
         , logHook = dynamicLogWithPP xmobarPP
-                        { ppOutput = \x -> hPutStrLn xmproc x               -- >> hPutStrLn xmproc x
-                        , ppCurrent = xmobarColor color1  "" . wrap " \xf7a5 " "\xf7a5 " -- Current workspace in xmobar - Wrap under Font Awesome's grip-lines-vertical
-                        , ppVisible = xmobarColor color2 ""                -- Visible but not current workspace
-                        , ppHidden = xmobarColor color2 "" . wrap "" ""   -- Hidden workspaces in xmobar
-                        , ppHiddenNoWindows = xmobarColor color7 ""        -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor "#d0d0d0" "" . shorten 80     -- Title of active window in xmobar
-                        , ppSep =  "<fc=#A58F66> | </fc>"                     -- Separators in xmobar
-                        , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"  -- Urgent workspace
-                        , ppExtras  = [windowCount]                           -- # of windows current workspace
-                        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+                        { ppOutput = \x -> hPutStrLn xmproc x                             -- Workspace StOut
+                        , ppCurrent = xmobarColor color1  "" . wrap " \xf7a5 " "\xf7a5 "  -- Current workspace in xmobar - Wrap under Font Awesome's grip-lines-vertical
+                        , ppVisible = xmobarColor color2 ""                               -- Visible but not current workspace
+                        , ppHidden = xmobarColor color2 "" . wrap "" ""                   -- Hidden workspaces in xmobar
+                        , ppHiddenNoWindows = xmobarColor color7 ""                       -- Hidden workspaces (no windows)
+                        , ppTitle = xmobarColor color7 "" . shorten 80                    -- Title of active window in xmobar
+                        , ppSep =  xmobarColor color7 "" " | "                            -- Separators in xmobar
+                        , ppLayout = xmobarColor color2 ""                                -- Layout name format
+                        , ppUrgent = xmobarColor color3 "" . wrap "!" "!"                 -- Urgent workspace
+                        , ppExtras  = [windowCount]                                       -- Number of windows in the current workspace
+                        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                      -- Orders xmobar Output
                         , ppSort = fmap (.namedScratchpadFilterOutWorkspace) $ ppSort xmobarPP -- Hides the 'NSP' workspace created by opening a Scratchpad   
                         }
         } `additionalKeysP`         myKeys

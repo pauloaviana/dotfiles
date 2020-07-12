@@ -60,12 +60,15 @@ settings:
     '*://*.duckduckgo.com/*': true
     '*://*.github.com/*': true
     '*://*.gitlab.com/*': true
+    '*://*.golem.ph.utexas.edu/*': true
     '*://*.leanprover-community.github.io/*': true
     '*://*.mail.protonmail.com/*': true
+    '*://*.mastodon.zaclys.com/*': true
     '*://*.runbox.com/*': true
     '*://*.rutracker.org/*': true
     '*://*.searx.tuxcloud.net/*': true
     '*://*.settings/*': true
+    '*://*.videos.lukesmith.xyz/*': true
     '*://*.www.protondb.com/*': true
     '*://*.www.reddit.com/*': true
     '*://*.www.youtube.com/*': true
