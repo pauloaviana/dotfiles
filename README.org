@@ -1,7 +1,7 @@
 #+TITlE: dotfiles
 #+STARTUP: inlineimages
 
-[[~/sshot.png]]
+[[sshot.png]]
 
 
 - Operating System(s): Arch Linux & Parabola
