@@ -1,5 +1,8 @@
 #+TITlE: dotfiles
 #+STARTUP: inlineimages
+#+ATTR_ORG: :width 300
+
+[[.local/share/images/screenshot.png]]
 
 - Operating System(s): Arch Linux & Parabola
 - Shell: zsh
