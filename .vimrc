@@ -39,7 +39,7 @@ syntax on
 " Set cursor line
 set cursorline
 
-colorscheme onedark
+" colorscheme onedark
 
 execute pathogen#infect()
 filetype plugin indent on
