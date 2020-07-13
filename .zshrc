@@ -43,6 +43,7 @@ alias vf='vifm'
 alias ka='killall'
 alias ..='cd ..'
 alias yt='youtube-dl $argv'
+alias yta='youtube-dl --add-metadata -i -x --audio-format flac'
 alias rm="rm -i"
 alias mv="mv -i"
 alias tarx="tar -xvf"
