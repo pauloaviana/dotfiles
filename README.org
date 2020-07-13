@@ -1,10 +1,5 @@
 #+TITlE: dotfiles
 #+STARTUP: inlineimages
-#+ATTR_ORG: :width 400px
-#+ATTR_HTML: :width 400px
-
-[[sshot.png]]
-
 
 - Operating System(s): Arch Linux & Parabola
 - Shell: zsh
