@@ -1,25 +1,25 @@
 #+TITlE: dotfiles
 #+STARTUP: inlineimages
 
-[[~/temp/sshot.png]]
+[[~/sshot.png]]
 
 
-* Operating System(s): Arch Linux & Parabola
-* Shell: zsh
-* Window Manager: XMonad
-* Editor(s): Doom Emacs & Vim
-* Terminal Emulator: st
-* Launcher(s): dmenu & XMonad.Prompt
-* Web Browser: qutebrowser
-* File Manager: vifm
-* Media Player: mpv
+- Operating System(s): Arch Linux & Parabola
+- Shell: zsh
+- Window Manager: XMonad
+- Editor(s): Doom Emacs & Vim
+- Terminal Emulator: st
+- Launcher(s): dmenu & XMonad.Prompt
+- Web Browser: qutebrowser
+- File Manager: vifm
+- Media Player: mpv
 
-* Scripts are located in the ~/.local/bin directory
-* My `~/` structure:
-** audio
-** documents
-** downloads
-** images
-** projects
-** temp
-** videos
+- Scripts are located in the ~/.local/bin directory
+- My `~/` structure:
+  - audio
+  - documents
+  - downloads
+  - images
+  - projects
+  - temp
+  - videos
