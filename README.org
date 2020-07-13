@@ -1,5 +1,6 @@
 #+TITlE: dotfiles
 #+STARTUP: inlineimages
+#+ATTR_ORG: :width 400px
 
 [[sshot.png]]
 
