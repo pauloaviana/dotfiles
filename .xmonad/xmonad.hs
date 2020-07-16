@@ -57,7 +57,7 @@ import XMonad.Prompt.Shell
 import Colors
 
 ------------------------------------------------------------------------
----CONFIG
+---VARIABLES
 
 myFont          = "xft:noto sans:pixelsize=8"
 myModMask       = mod4Mask  
@@ -66,6 +66,9 @@ myTextEditor    = "vim"
 myBrowser       = "qutebrowser"
 myBorderWidth   = 2        
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+
+------------------------------------------------------------------------
+---MAIN = DO
 
 main = do
     xmproc <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc"
@@ -176,7 +179,7 @@ myKeys =
     --    , ("M-S-<Return>", spawn ("dmenu_run" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --dmenu_run
         , ("M-C-i", spawn ("networkmanager_dmenu" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --NetworkManager
 
-    ---Applications (Super+Alt+Key)
+    ---Programs
         , ("M-<Print>", spawn ("scrot -zq 100 -e 'mv $f ~/images/shots'"))
         , ("M-C-c", spawn (myTerminal ++ " -e calcurse"))
         , ("M-C-b", spawn ("$HOME/.local/bin/bmark"))
@@ -382,4 +385,3 @@ searchList = [ ("a", archwiki)
              , ("w", S.wikipedia)
              , ("y", S.youtube)
              ]
-

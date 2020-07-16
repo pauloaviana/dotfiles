@@ -22,6 +22,9 @@ set pastetoggle=<F2>
 " Automatic text replacement
 map S :%s//gI<Left><Left><Left>
 
+" Disable autocomments on new lines
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Ignore case sensitivity and do a smart search
 set ignorecase
 set smartcase
