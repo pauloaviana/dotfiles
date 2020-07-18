@@ -27,6 +27,8 @@ settings:
         K: tab-prev
         M: quickmark-del
         R: config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; reload
+        J: scroll-page 0 1
+        K: scroll-page 0 -1
         W: tab-give
         ZZ: quit --save
         cd: null
