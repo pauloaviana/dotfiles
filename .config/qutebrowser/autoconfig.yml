@@ -22,20 +22,17 @@ settings:
         ',h': history
         ',s': set
         ',v': hint links spawn mpv {hint-url}
+        l: tab-next
+        h: tab-prev
         D: close
-        J: tab-next
-        K: tab-prev
-        M: quickmark-del
-        R: config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; reload
         J: scroll-page 0 1
         K: scroll-page 0 -1
+        M: quickmark-del
+        R: config-cycle -p -u *://*.{url:host}/* content.javascript.enabled ;; reload
         W: tab-give
         ZZ: quit --save
-        cd: null
         dd: close
-        gD: null
         gw: tab-give
-        h: null
         tab-give: gw
         xb: config-cycle statusbar.hide
         xd: download-clear
@@ -66,6 +63,7 @@ settings:
     '*://*.leanprover-community.github.io/*': true
     '*://*.mail.protonmail.com/*': true
     '*://*.mastodon.zaclys.com/*': true
+    '*://*.math.stackexchange.com/*': true
     '*://*.runbox.com/*': true
     '*://*.rutracker.org/*': true
     '*://*.searx.tuxcloud.net/*': true
