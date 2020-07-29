@@ -274,7 +274,7 @@ myManageHook = composeAll
 
 myLayout = onWorkspace (mySpaces !! 6) monocle $
          avoidStruts $ smartBorders $ mouseResize $ windowArrange $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) $ 
-           onWorkspaces [(mySpaces !! 1), (mySpaces !! 3)] monocle $        
+           onWorkspace (mySpaces !! 1) monocle $        
            myDefaultLayout
              where 
                  myDefaultLayout = mkToggle (single MIRROR) (tall ||| monocle ||| threeCol ||| grid)
