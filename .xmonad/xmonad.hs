@@ -40,7 +40,7 @@ import XMonad.Layout.SimplestFloat --Float Layout
 import XMonad.Layout.ThreeColumns --ThreeColums Layout
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Renamed (renamed, Rename(CutWordsLeft, Replace))
-import XMonad.Layout.Spacing (spacing) 
+import XMonad.Layout.Spacing (Spacing, Border(..), spacingRaw)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit) --Set limits to the number of windows that can be shown
@@ -183,7 +183,7 @@ myKeys =
         , ("M-<Print>", spawn ("scrot -zq 100 -e 'mv $f ~/images/shots'"))
         , ("M-C-c", spawn (myTerminal ++ " -e calcurse"))
         , ("M-C-b", spawn ("$HOME/.local/bin/bmark"))
-        , ("M-C-d", spawn (myTerminal ++ " -e taskell .taskell.md"))
+        , ("M-C-d", spawn (myTerminal ++ " -e taskell"))
         , ("M-C-w", spawn ("qutebrowser"))
         , ("M-C-e", spawn ("emacs"))
         , ("M-C-f", spawn (myTerminal ++ " -e vifm"))
@@ -279,11 +279,24 @@ myLayout = onWorkspace (mySpaces !! 6) monocle $
              where 
                  myDefaultLayout = mkToggle (single MIRROR) (tall ||| monocle ||| threeCol ||| grid)
 
-tall       = renamed [Replace "tall"]     $ limitWindows 12 $ spacing 6 $ ResizableTall 1 (3/100) (1/2) []
+tall       = renamed [Replace "tall"]     $ limitWindows 12 $ mySpacing $ ResizableTall 1 (3/100) (1/2) []
 monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ noBorders Full
-grid       = renamed [Replace "grid"]     $ limitWindows 12 $ spacing 6 $ Grid (16/10)
-threeCol   = renamed [Replace "threeCol"] $ limitWindows 3  $ spacing 3 $ ThreeColMid 1 (3/100) (1/2) 
+grid       = renamed [Replace "grid"]     $ limitWindows 12 $ mySpacing $ Grid (16/10)
+threeCol   = renamed [Replace "threeCol"] $ limitWindows 3  $ mySpacing $ ThreeColMid 1 (3/100) (1/2) 
 --floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
+
+mySpacing = spacingRaw
+        moreThanTwo
+        screenBorder
+        boolScreenBorder
+        windowBorder
+        boolWindowBorder
+   where
+    moreThanTwo = False
+    boolWindowBorder = True
+    boolScreenBorder = True
+    windowBorder = Border 4 4 4 4
+    screenBorder = Border 2 2 2 2
 
 ------------------------------------------------------------------------
 ---SCRATCHPADS
@@ -304,7 +317,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnTaskell  = myTerminal ++  " -n scratchpad taskell .taskell.md "
+    spawnTaskell  = myTerminal ++  " -n scratchpad taskell "
     findTaskell   = resource =? "taskell"
     manageTaskell = customFloating $ W.RationalRect l t w h
                  where
