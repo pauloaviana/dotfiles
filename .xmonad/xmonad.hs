@@ -283,7 +283,6 @@ tall       = renamed [Replace "tall"]     $ limitWindows 12 $ mySpacing $ Resiza
 monocle    = renamed [Replace "monocle"]  $ limitWindows 20 $ noBorders Full
 grid       = renamed [Replace "grid"]     $ limitWindows 12 $ mySpacing $ Grid (16/10)
 threeCol   = renamed [Replace "threeCol"] $ limitWindows 3  $ mySpacing $ ThreeColMid 1 (3/100) (1/2) 
---floats     = renamed [Replace "floats"]   $ limitWindows 20 $ simplestFloat
 
 mySpacing = spacingRaw
         moreThanTwo
@@ -297,6 +296,7 @@ mySpacing = spacingRaw
     boolScreenBorder = True
     windowBorder = Border 4 4 4 4
     screenBorder = Border 2 2 2 2
+--Border :: top bottom right left
 
 ------------------------------------------------------------------------
 ---SCRATCHPADS
