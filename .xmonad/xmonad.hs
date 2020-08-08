@@ -255,7 +255,7 @@ myManageHook = composeAll
 -- -- 'className' as used below.
 
      [
-        className =? "firefox"           --> doShift (mySpaces !! 1)
+        className =? "Brave-browser"     --> doShift (mySpaces !! 1)
       , className =? "Tor Browser"       --> doShift (mySpaces !! 1)
       , className =? "qutebrowser"       --> viewShift (mySpaces !! 1)
       , title =? "newsboat"              --> doShift (mySpaces !! 2)
@@ -291,7 +291,7 @@ mySpacing = spacingRaw
         windowBorder
         boolWindowBorder
    where
-    moreThanTwo = False
+    moreThanTwo = True
     boolWindowBorder = True
     boolScreenBorder = True
     windowBorder = Border 4 4 4 4
