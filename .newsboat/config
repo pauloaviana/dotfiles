@@ -33,6 +33,7 @@ color article cyan default
 
 highlight feedlist ".*(0/0))" black
 highlight feedlist  "---.*---" yellow default bold
+highlight feedlist  "#.*#" blue default bold
 
 browser linkhandler
 macro , open-in-browser
