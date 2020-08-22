@@ -40,7 +40,7 @@ macro , open-in-browser
 macro d set browser "youtube-dl --add-metadata -ic" ; open-in-browser ; set browser linkhandler
 macro t set browser "youtube-dl --add-metadata -xic -f bestaudio/best" ; open-in-browser ; set browser linkhandler
 macro a set browser "mpv --audio-display=no" ; open-in-browser ; set browser linkhandler
-macro v set browser "setsid --fork nohup mpv --player-operation-mode=pseudo-gui > /dev/null" ; open-in-browser ; set browser linkhandler
+macro v set browser "setsid --fork nohup mpv --player-operation-mode=pseudo-gui > /dev/null" ; open-in-browser-and-mark-read ; set browser linkhandler
 macro w set browser "setsid --fork nohup qutebrowser > /dev/null" ; open-in-browser-and-mark-read ; set browser linkhandler
 macro p set browser "dmenuhandler" ; open-in-browser ; set browser linkhandler
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
