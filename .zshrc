@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export TERMINAL="st"
-export EDITOR="vim"
+export EDITOR="nvim"
 export BROWSER="qutebrowser"
 
 export PATH="$HOME/.emacs.d/bin:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$PATH"
@@ -25,6 +25,10 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
+alias ll="cd ~/videos/lean/summer ; youtube-dl --playlist-start 8 'https://www.youtube.com/playlist?list=PLVZep5wTamMmvdvczjrLctDM9T4nBse1M'"
+alias pb="cd ~/videos/prob ; youtube-dl 'https://www.youtube.com/playlist?list=PLo4jXE-LdDTS5BYqea-LcHdtjKwVcepP7'"
+alias al="cd ~/videos/algebra ; youtube-dl 'https://www.youtube.com/playlist?list=PLo4jXE-LdDTRshj4emfKIor1lkOUTnXmJ'"
+
 # ALIASES
 alias md='sudo mount /dev/sdc1 /mnt'
 alias umd='sudo umount /mnt'
@@ -35,7 +39,7 @@ alias cp='cp -iv'
 alias du="du -h"
 alias cc='calcurse'
 alias nb='newsboat'
-alias v='vim'
+alias v='nvim'
 alias vf='vifm'
 alias ka='killall'
 alias ..='cd ..'
@@ -45,15 +49,15 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias tarx="tar -xvf"
 alias tsk="taskell ~/.config/taskell/taskell.md"
-alias xmd="vim ~/.xmonad/xmonad.hs"
-alias zshrc="vim ~/.zshrc"
-alias rss="vim ~/.newsboat/urls"
+alias xmd="nvim ~/.xmonad/xmonad.hs"
+alias zshrc="nvim ~/.zshrc"
+alias rss="nvim ~/.newsboat/urls"
 alias m="neomutt"
 alias mail="mbsync -a ; neomutt"
 alias nf="neofetch --gtk3 off --gtk2 off"
 alias xmdr="xmonad --recompile"
 alias tq="torque"
-alias xmb="vim ~/.config/xmobar/xmobarrc"
+alias xmb="nvim ~/.config/xmobar/xmobarrc"
 
 # fff CD on Exit
 f() {

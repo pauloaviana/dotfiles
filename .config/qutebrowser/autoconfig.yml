@@ -122,4 +122,4 @@ settings:
     global:
       DEFAULT: https://searx.tuxcloud.net/?q={}
   url.start_pages:
-    global: pauloleca.me
+    global: pauloleca.xyz

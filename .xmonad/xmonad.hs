@@ -62,7 +62,7 @@ import Colors
 myFont          = "xft:noto sans:pixelsize=8"
 myModMask       = mod4Mask  
 myTerminal      = "st"     
-myTextEditor    = "vim"    
+myTextEditor    = "nvim"    
 myBrowser       = "qutebrowser"
 myBorderWidth   = 2        
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -260,8 +260,8 @@ myManageHook = composeAll
       , className =? "qutebrowser"       --> viewShift (mySpaces !! 1)
       , title =? "newsboat"              --> doShift (mySpaces !! 2)
       , className =? "Emacs"             --> viewShift (mySpaces !! 3)
+      , className =? "Zulip"             --> doShift (mySpaces !! 3)
       , title =? "neomutt"               --> doShift (mySpaces !! 4)
-      , className =? "Zulip"             --> doShift (mySpaces !! 4)
       , className =? "discord"           --> doShift (mySpaces !! 4)
       , className =? "Steam"             --> doShift (mySpaces !! 5)
       , className =? "mpv"               --> viewShift (mySpaces !! 6)
@@ -378,7 +378,7 @@ searx, archwiki, aur, ebay, libgen, nlab, rutracker, wiktionary, hackage :: S.Se
 archwiki = S.searchEngine "ArchWiki" "https://wiki.archlinux.org/index.php?search="
 aur      = S.searchEngine "AUR" "https://aur.archlinux.org/packages/?K="
 ebay     = S.searchEngine "ebay" "https://www.ebay.com/sch/i.html?_nkw="
-libgen   = S.searchEngine "LibGen" "http://gen.lib.rus.ec/search.php?req="
+libgen   = S.searchEngine "LibGen" "http://libgen.lc/search.php?req="
 nlab     = S.searchEngine "NLab" "https://ncatlab.org/nlab/search?query="
 rutracker = S.searchEngine "RuTracker" "https://rutracker.org/forum/tracker.php?nm="
 wiktionary = S.searchEngine "Wiktionary" "https://en.wiktionary.org/w/index.php?search="
