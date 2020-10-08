@@ -52,6 +52,7 @@ import XMonad.Layout.LayoutCombinators --Comine Layouts and Jump directly to a L
     -- Prompts
 import XMonad.Prompt 
 import XMonad.Prompt.Shell
+import XMonad.Prompt.FuzzyMatch
 
     -- Pywal Colors
 import Colors
@@ -371,6 +372,8 @@ myXPConfig = def
       , showCompletionOnTab = False
       , alwaysHighlight     = False
       , maxComplRows        = Just 1
+      , searchPredicate     = fuzzyMatch
+      , sorter              = fuzzySort
       }
 
 --SEARCH PROMPTS

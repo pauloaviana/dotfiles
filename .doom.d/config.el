@@ -34,7 +34,7 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
+(setq org-todo-keywords '(sequence ))
 ;; Set default browser to handle links
 (setq browse-url-browser-function 'browse-url-qutebrowser)
 
@@ -42,6 +42,10 @@
 (setq org-agenda-files (list "~/documents/org/agenda.org"))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
+;; Archive DONE tasks
+(defun my-org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries 'org-archive-subtree "/DONE" 'file))
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
 ;; - `after!' for running code after a package has loaded
