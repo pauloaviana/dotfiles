@@ -75,6 +75,8 @@ settings:
     '*://*.www.youtube.com/*': true
     '*://*.www.zaclys.com/*': false
     global: false
+  content.notifications:
+    https://www.reddit.com: false
   content.webgl:
     global: false
   content.xss_auditing:

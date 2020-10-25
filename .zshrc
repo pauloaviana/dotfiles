@@ -25,10 +25,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-alias ll="cd ~/videos/lean/summer ; youtube-dl --playlist-start 8 'https://www.youtube.com/playlist?list=PLVZep5wTamMmvdvczjrLctDM9T4nBse1M'"
-alias pb="cd ~/videos/prob ; youtube-dl 'https://www.youtube.com/playlist?list=PLo4jXE-LdDTS5BYqea-LcHdtjKwVcepP7'"
-alias al="cd ~/videos/algebra ; youtube-dl 'https://www.youtube.com/playlist?list=PLo4jXE-LdDTRshj4emfKIor1lkOUTnXmJ'"
-
 # ALIASES
 alias md='sudo mount /dev/sdc1 /mnt'
 alias umd='sudo umount /mnt'
@@ -47,13 +43,13 @@ alias yt='youtube-dl $argv'
 alias yta='youtube-dl --add-metadata -i -x --audio-format flac'
 alias rm="rm -i"
 alias mv="mv -i"
+alias lc="locate"
 alias tarx="tar -xvf"
 alias tsk="taskell ~/.config/taskell/taskell.md"
 alias xmd="nvim ~/.xmonad/xmonad.hs"
 alias zshrc="nvim ~/.zshrc"
 alias rss="nvim ~/.newsboat/urls"
-alias m="neomutt"
-alias mail="mbsync -a ; neomutt"
+alias m="mbsync -a ; neomutt"
 alias nf="neofetch --gtk3 off --gtk2 off"
 alias xmdr="xmonad --recompile"
 alias tq="torque"

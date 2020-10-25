@@ -171,7 +171,8 @@ myKeys =
         , ("M-M1-d", namedScratchpadAction myScratchPads "taskell")
         , ("M-M1-p", namedScratchpadAction myScratchPads "cmus")
         , ("M-C-<Return>", namedScratchpadAction myScratchPads "vifm")
-        , ("M-M1-c", namedScratchpadAction myScratchPads "calcurse")
+        , ("M-M1-s", namedScratchpadAction myScratchPads "htop")
+        , ("M-M1-g", namedScratchpadAction myScratchPads "gotop")
         
     -- Terminal
         , ("M-<Return>", spawn myTerminal)
@@ -182,13 +183,11 @@ myKeys =
 
     ---Programs
         , ("M-<Print>", spawn ("scrot -zq 100 -e 'mv $f ~/images/shots'"))
-        , ("M-C-c", spawn (myTerminal ++ " -e calcurse"))
         , ("M-C-b", spawn ("$HOME/.local/bin/bmark"))
         , ("M-C-d", spawn (myTerminal ++ " -e taskell"))
         , ("M-C-w", spawn ("qutebrowser"))
         , ("M-C-e", spawn ("emacs"))
         , ("M-C-f", spawn (myTerminal ++ " -e vifm"))
-        , ("M-C-t", spawn (myTerminal ++ " -e htop"))
         , ("M-C-n", spawn (myTerminal ++ " -e newsboat"))
         , ("M-C-p", spawn (myTerminal ++ " -e cmus"))
         , ("M-C-m", spawn (myTerminal ++ " -e neomutt"))
@@ -306,13 +305,22 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
                   NS "taskell" spawnTaskell findTaskell manageTaskell,
                   NS "cmus" spawnCmus findCmus manageCmus,
                   NS "vifm" spawnVifm findVifm manageVifm,
-                  NS "calcurse" spawnCalcurse findCalcurse manageCalcurse
+                  NS "htop" spawnHtop findHtop manageHtop,
+                  NS "gotop" spawnGotop findGotop manageGotop
                 ]
 
     where
     spawnTerm  = myTerminal ++  " -n scratchpad"
     findTerm   = resource =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
+                 where
+                 h = 0.9
+                 w = 0.9
+                 t = 0.95 -h
+                 l = 0.95 -w
+    spawnHtop  = myTerminal ++  " -n scratchpad htop "
+    findHtop   = resource =? "htop"
+    manageHtop = customFloating $ W.RationalRect l t w h
                  where
                  h = 0.9
                  w = 0.9
@@ -342,9 +350,9 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnCalcurse  = myTerminal ++  " -n scratchpad calcurse "
-    findCalcurse   = resource =? "calcurse"
-    manageCalcurse = customFloating $ W.RationalRect l t w h
+    spawnGotop  = myTerminal ++  " -n scratchpad gotop "
+    findGotop   = resource =? "gotop"
+    manageGotop = customFloating $ W.RationalRect l t w h
                  where
                  h = 0.9
                  w = 0.9
