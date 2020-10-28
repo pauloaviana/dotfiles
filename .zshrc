@@ -8,7 +8,7 @@ export TERMINAL="st"
 export EDITOR="nvim"
 export BROWSER="qutebrowser"
 
-export PATH="$HOME/.emacs.d/bin:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.emacs.d/bin/doom:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$PATH"
  
 # PASS
 export PASSWORD_STORE_CLIP_TIME=10

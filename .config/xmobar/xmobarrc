@@ -12,14 +12,14 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
        , persistent = True
        , iconRoot = "/home/paulo/.config/xmobar/xpm" -- default: "."
        , commands = [ Run Date "%a, %b %d %Y, %H:%M" "date" 10
-                    , Run Wireless "wlp3s0" ["-t", "[<quality>]"] 10
-                    , Run Network "enp0s25" ["-t", "[ <rx>|<tx> ]"] 10
-                    , Run Volume "default" "Master" ["-t", "[<volume>%|<volumebar>]"] 5
+                    -- , Run Wireless "wlp3s0" ["-t", "[<quality>]"] 10
+                    , Run Network "enp1s0" ["-t", "[ <rx>|<tx> ]"] 10
+                    , Run Volume "default" "Master" ["-t", "[<volume>%|<volumebar>]"] 2
                     , Run Com "/home/paulo/.local/bin/updates-arch.sh" [""] "arch" 3600
                     , Run Com "/home/paulo/.local/bin/updates-arch-aur.sh" [""] "aur" 3600
                     , Run Cpu ["-t", "[<total>%]","-H","50","--high","red"] 10
                     , Run Memory ["-t", "[<used>/<total>]"] 10
-                    , Run DiskU [("/", "[<free>]"), ("sdb1", "[<free>]")] [] 3600
+                    , Run DiskU [("/", "[<free>]"), ("sdb1", "[<free>]"), ("sdc1", "[<free>]")] [] 3600
                     , Run UnsafeStdinReader
                     , Run Battery ["-t", "<acstatus>", "--" -- battery specific options
                                        -- discharging status
@@ -32,7 +32,7 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C1935A><fn=1> </fn>%arch%</fc> <fc=#C1935A>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#5D748C><fn=1> </fn>%default:Master%</fc>   <fc=#7E7F7F><fn=1> </fn>%cpu%</fc>   <fc=#708A98><fn=1> </fn>%memory%</fc>   <fc=#9C9A9F><fn=1> </fn>%disku%</fc>   <fc=#B74532><fn=1> </fn>%enp0s25%</fc>   <fc=#996b10>%battery%</fc>   <fc=#d8d5d5>%date%</fc>  "
+       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C1935A><fn=1> </fn>%arch%</fc> <fc=#C1935A>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#5D748C><fn=1> </fn>%default:Master%</fc>   <fc=#7E7F7F><fn=1> </fn>%cpu%</fc>   <fc=#708A98><fn=1> </fn>%memory%</fc>   <fc=#9C9A9F><fn=1> </fn>%disku%</fc>   <fc=#B74532><fn=1> </fn>%enp1s0%</fc>   <fc=#996b10>%battery%</fc>   <fc=#d8d5d5>%date%</fc>  "
        }
 
 -- To call a .xpm file, use <icon=$FILE_NAME.xpm/>
