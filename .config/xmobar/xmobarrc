@@ -21,18 +21,18 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
                     , Run Memory ["-t", "[<used>/<total>]"] 10
                     , Run DiskU [("/", "[<free>]"), ("sdb1", "[<free>]"), ("sdc1", "[<free>]")] [] 3600
                     , Run UnsafeStdinReader
-                    , Run Battery ["-t", "<acstatus>", "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o"	, "<icon=battery_off.xpm/> [<left>%] (<timeleft>)"
-                                       -- AC "on" status
-                                       , "-O"	, "<icon=battery_charging.xpm/> <fc=#F0C674>[<left>%]</fc>"
-                                       -- charged status
-                                       , "-i"	, "<icon=battery_full.xpm/> <fc=#F0C674>[FULL]</fc>"
-                             ] 50
+--                  , Run Battery ["-t", "<acstatus>", "--" -- battery specific options
+--                                       -- discharging status
+--                                       , "-o"	, "<icon=battery_off.xpm/> [<left>%] (<timeleft>)"
+--                                       -- AC "on" status
+--                                       , "-O"	, "<icon=battery_charging.xpm/> <fc=#F0C674>[<left>%]</fc>"
+--                                       -- charged status
+--                                       , "-i"	, "<icon=battery_full.xpm/> <fc=#F0C674>[FULL]</fc>"
+--                             ] 50
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C1935A><fn=1> </fn>%arch%</fc> <fc=#C1935A>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#5D748C><fn=1> </fn>%default:Master%</fc>   <fc=#7E7F7F><fn=1> </fn>%cpu%</fc>   <fc=#708A98><fn=1> </fn>%memory%</fc>   <fc=#9C9A9F><fn=1> </fn>%disku%</fc>   <fc=#B74532><fn=1> </fn>%enp1s0%</fc>   <fc=#996b10>%battery%</fc>   <fc=#d8d5d5>%date%</fc>  "
+       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C1935A><fn=1> </fn>%arch%</fc> <fc=#C1935A>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#5D748C><fn=1> </fn>%default:Master%</fc>   <fc=#7E7F7F><fn=1> </fn>%cpu%</fc>   <fc=#708A98><fn=1> </fn>%memory%</fc>   <fc=#9C9A9F><fn=1> </fn>%disku%</fc>   <fc=#B74532><fn=1> </fn>%enp1s0%</fc>   <fc=#d8d5d5>%date%</fc>  "
        }
 
 -- To call a .xpm file, use <icon=$FILE_NAME.xpm/>
