@@ -105,9 +105,11 @@ main = do
 
 myStartupHook = do
           spawnOnce "unclutter --timeout 3 --ignore-scrolling --jitter 150 &"
-          spawnOnce "redshift -P -O 4500k &"
-          spawnOnce "transmission-daemon &"
+          spawnOnce "redshift -P -O 4500k"
+          spawnOnce "transmission-daemon"
           spawnOnce "$HOME/.local/bin/keybind"
+          spawnOnce "emacs --daemon"
+          spawnOnce "xset s off -dpms"
 
 ------------------------------------------------------------------------
 ---KEYBINDINGS
