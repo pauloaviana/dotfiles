@@ -171,7 +171,7 @@ myKeys =
     -- Scratchpads
         , ("M-M1-<Return>", namedScratchpadAction myScratchPads "terminal")
         , ("M-M1-d", namedScratchpadAction myScratchPads "taskell")
-        , ("M-M1-p", namedScratchpadAction myScratchPads "cmus")
+        , ("M-M1-c", namedScratchpadAction myScratchPads "cmus")
         , ("M-C-<Return>", namedScratchpadAction myScratchPads "vifm")
         , ("M-M1-s", namedScratchpadAction myScratchPads "htop")
         , ("M-M1-g", namedScratchpadAction myScratchPads "gotop")
@@ -191,7 +191,8 @@ myKeys =
         , ("M-C-e", spawn ("emacs"))
         , ("M-C-f", spawn (myTerminal ++ " -e vifm"))
         , ("M-C-n", spawn (myTerminal ++ " -e newsboat"))
-        , ("M-C-p", spawn (myTerminal ++ " -e cmus"))
+        , ("M-C-c", spawn (myTerminal ++ " -e cmus"))
+        , ("M-C-p", spawn ("passmenu"))
         , ("M-C-m", spawn (myTerminal ++ " -e neomutt"))
         , ("M-C-q", spawn ("transmission-gtk"))
         , ("M-C-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
@@ -398,6 +399,7 @@ nlab     = S.searchEngine "NLab" "https://ncatlab.org/nlab/search?query="
 rutracker = S.searchEngine "RuTracker" "https://rutracker.org/forum/tracker.php?nm="
 wiktionary = S.searchEngine "Wiktionary" "https://en.wiktionary.org/w/index.php?search="
 hackage = S.searchEngine "Hackage" "http://hackage.haskell.org/packages/search?terms="
+orthodoxwiki= S.searchEngine "OrthodoxWiki" "https://orthodoxwiki.org/index.php?search="
 searx = S.searchEngine "SearX" "https://searx.tuxcloud.net/?q="
 
 searchList :: [(String, S.SearchEngine)]
@@ -410,6 +412,7 @@ searchList = [ ("a", archwiki)
              , ("d", wiktionary)
              , ("s", searx)
              , ("h", hackage)
+             , ("o", orthodoxwiki)
              , ("w", S.wikipedia)
              , ("y", S.youtube)
              ]

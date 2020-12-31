@@ -3,8 +3,8 @@
 
 Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting=true, Font Awesome 5 Free Solid:size=11"
        , additionalFonts = [ "xft:Font Awesome 5 Free Solid:size=9" ] --Required to use the font on the bar regardless of the StdinReader output
-       , bgColor = "#0e0f12"
-       , fgColor = "#B74532"
+       , bgColor = "#0B0403"
+       , fgColor = "#B14E06"
        , position = Top
        , lowerOnStart = True
        , hideOnStart = False

@@ -80,6 +80,7 @@ set input.flac.priority=50
 set input.mad.priority=55
 set input.modplug.priority=50
 set input.mpc.priority=50
+set input.opus.priority=50
 set input.vorbis.priority=50
 set input.wav.priority=50
 set input.wavpack.priority=50
@@ -188,7 +189,7 @@ bind common r toggle repeat
 bind common s toggle aaa_mode
 bind common space player-pause
 bind common t toggle aaa_mode
-bind common tab win-next
+bind common tab win-toggle
 bind common u update-cache
 bind common v right-view
 bind common x invert
