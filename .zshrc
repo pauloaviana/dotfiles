@@ -53,6 +53,7 @@ alias m="mbsync -a ; neomutt"
 alias nf="neofetch --gtk3 off --gtk2 off"
 alias xmdr="xmonad --recompile"
 alias tq="torque"
+alias g="git"
 alias xmb="nvim ~/.config/xmobar/xmobarrc"
 
 # fff CD on Exit
