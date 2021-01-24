@@ -36,6 +36,7 @@ alias du="du -h"
 alias cc='calcurse'
 alias nb='newsboat'
 alias v='nvim'
+alias makepkg='makepkg -si'
 alias vf='vifm'
 alias ka='killall'
 alias ..='cd ..'
