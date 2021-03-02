@@ -36,8 +36,9 @@
 (setq display-line-numbers-type t)
 (setq org-todo-keywords '(sequence ))
 ;; Set default browser to handle links
-(setq browse-url-browser-function 'browse-url-qutebrowser)
-
+;;(setq browse-url-browser-function 'browse-url-generic)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "brave")
 ;; Set org-agenda files
 (setq org-agenda-files (list "~/documents/org/agenda.org"))
 ;; Here are some additional functions/macros that could help you configure Doom:

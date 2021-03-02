@@ -3,8 +3,8 @@
 
 Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting=true, Font Awesome 5 Free Solid:size=11"
        , additionalFonts = [ "xft:Font Awesome 5 Free Solid:size=9" ] --Required to use the font on the bar regardless of the StdinReader output
-       , bgColor = "#0B0403"
-       , fgColor = "#B14E06"
+       , bgColor = "#242634"
+       , fgColor = "#c6e2f4"
        , position = Top
        , lowerOnStart = True
        , hideOnStart = False
@@ -32,7 +32,7 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C1935A><fn=1> </fn>%arch%</fc> <fc=#C1935A>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#5D748C><fn=1> </fn>%default:Master%</fc>   <fc=#7E7F7F><fn=1> </fn>%cpu%</fc>   <fc=#708A98><fn=1> </fn>%memory%</fc>   <fc=#9C9A9F><fn=1> </fn>%disku%</fc>   <fc=#B74532><fn=1> </fn>%enp1s0%</fc>   <fc=#d8d5d5>%date%</fc>  "
+       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#b37d51><fn=1> </fn>%arch%</fc> <fc=#b37d51>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#6EA2E2><fn=1> </fn>%default:Master%</fc>   <fc=#4C95E3><fn=1> </fn>%cpu%</fc>   <fc=#90B2E7><fn=1> </fn>%memory%</fc>   <fc=#4C95E3><fn=1> </fn>%disku%</fc>   <fc=#90B2E7><fn=1> </fn>%enp1s0%</fc>   <fc=#c6e2f4>%date%</fc>  "
        }
 
 -- To call a .xpm file, use <icon=$FILE_NAME.xpm/>

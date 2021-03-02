@@ -185,6 +185,7 @@ myKeys =
 
     ---Programs
         , ("M-<Print>", spawn ("scrot -zq 100 -e 'mv $f ~/images/shots'"))
+        , ("M-S-<Print>", spawn ("scrot -sq 100 -e 'mv $f ~/images/shots'"))
         , ("M-C-b", spawn ("$HOME/.local/bin/bmark"))
         , ("M-C-d", spawn (myTerminal ++ " -e taskell"))
         , ("M-C-w", spawn ("qutebrowser"))
@@ -261,16 +262,15 @@ myManageHook = composeAll
 
      [
         className =? "Brave-browser"     --> doShift (mySpaces !! 1)
-      , className =? "Tor Browser"       --> doShift (mySpaces !! 1)
-      , className =? "qutebrowser"       --> viewShift (mySpaces !! 1)
+      , className =? "qutebrowser"       --> doShift (mySpaces !! 1)
       , title =? "newsboat"              --> doShift (mySpaces !! 2)
       , className =? "Emacs"             --> viewShift (mySpaces !! 3)
       , className =? "Zulip"             --> doShift (mySpaces !! 4)
       , title =? "neomutt"               --> doShift (mySpaces !! 4)
       , className =? "discord"           --> doShift (mySpaces !! 4)
+      , className =? "TelegramDesktop"   --> doShift (mySpaces !! 4)
       , className =? "Steam"             --> doShift (mySpaces !! 5)
       , className =? "mpv"               --> viewShift (mySpaces !! 6)
-      , className =? "qBittorrent"       --> doShift (mySpaces !! 8)
      ] <+> namedScratchpadManageHook myScratchPads
         where viewShift = doF . liftM2 (.) W.greedyView W.shift
 
