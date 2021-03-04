@@ -122,25 +122,25 @@ myKeys =
         , ("M-S-q s", spawn "poweroff")              -- Shutdown
         , ("M-S-q r", spawn "reboot")                -- Reboot
     
-    -- Windows
+    -- Killing Windows
         , ("M-S-c", kill1)                           -- Kill the currently focused client
-        , ("M-S-a", killAll)                         -- Kill all the windows on current workspace
+        , ("M-C-x", killAll)                         -- Kill all the windows on current workspace
+        , ("M-S-x", killAllOtherCopies)             -- Kill all 'other' copies of the focused window 
 
     -- Floating
         , ("M-<Delete>", withFocused $ windows . W.sink)  -- Push floating window back to tile.
-        , ("M-S-<Delete>", sinkAll)                  -- Push ALL floating windows back to tile.
+        , ("M-S-<Delete>", sinkAll)                       -- Push ALL floating windows back to tile.
 
     -- Windows navigation
-        , ("M-m", windows W.focusMaster)             -- Move focus to the master window
         , ("M-j", windows W.focusDown)               -- Move focus to the next window
         , ("M-k", windows W.focusUp)                 -- Move focus to the prev window
-        , ("M-S-m", windows W.swapMaster)            -- Swap the focused window and the master window
         , ("M-S-j", windows W.swapDown)              -- Swap the focused window with the next window
         , ("M-S-k", windows W.swapUp)                -- Swap the focused window with the prev window
-        , ("M-<Tab>", promote)                       -- Promote focused window to master, changing order
-        , ("M-<Backspace>", rotSlavesDown)           -- Rotate all windows except master and keep focus in place
-        , ("M-S-<Backspace>", rotAllDown)                 -- Rotate all the windows in the current stack
-        , ("M-M1-x", killAllOtherCopies)             -- Kill all 'other' copies of the focused window 
+        , ("M-m", windows W.focusMaster)             -- Move focus to the master window
+        , ("M-S-s", windows W.swapMaster)            -- Swap the focused window and the master window
+        , ("M-<Tab>", promote)                       -- Promote focused window to master, rotating the order
+        , ("M-e", rotSlavesDown)           -- Rotate all windows except master and keep focus in place
+        , ("M-S-e", rotAllDown)            -- Rotate all the windows in the current stack
 
     -- Layouts
         , ("M-C-h", sendMessage Shrink)                                    --Shrink Focused Window
@@ -149,8 +149,8 @@ myKeys =
         , ("M-f", sendMessage $ JumpToLayout "monocle")                    -- Jump to the 'monocle' layout
         , ("M-g", sendMessage $ JumpToLayout "grid")                       -- Jump to the 'grid' layout
         , ("M-s", sendMessage $ JumpToLayout "threeCol")                   -- Jump to the 'threeCol' layout
-        , ("M-a", sendMessage $ Toggle MIRROR)                               -- Toggles Mirror Layouts
-        , ("M-S-=", sendMessage ToggleStruts)                              -- Toggles struts
+        , ("M-a", sendMessage $ Toggle MIRROR)                             -- Toggles Mirror Layouts
+        , ("M-b", sendMessage ToggleStruts)                                -- Toggles struts
         , ("M-S-b", sendMessage $ Toggle NOBORDERS)                        -- Toggles noborder
         , ("M-<Escape>", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts) -- Toggles noborder/full
         , ("M-<KP_Multiply>", sendMessage (IncMasterN 1))   -- Increase number of clients in the master pane
@@ -159,21 +159,20 @@ myKeys =
         , ("M-S-<KP_Divide>", decreaseLimit)                -- Decrease number of windows that can be shown
 
     -- Workspaces
+        , ("M-l", moveTo Next nonNSP)                                       -- Move to the next workspace
+        , ("M-h", moveTo Prev nonNSP)                                       -- Move to the previous workspace
+        , ("M-S-l", shiftTo Next nonNSP >> moveTo Next nonNSP)              -- Shifts focused window to next workspace
+        , ("M-S-h", shiftTo Prev nonNSP >> moveTo Prev nonNSP)              -- Shifts focused window to previous workspace
         , ("M-<XF86Forward>", moveTo Next nonNSP)                           -- Move to the next workspace
         , ("M-<XF86Back>", moveTo Prev nonNSP)                              -- Move to the previous workspace
         , ("M-S-<XF86Forward>", shiftTo Next nonNSP >> moveTo Next nonNSP)  -- Shifts focused window to next workspace
         , ("M-S-<XF86Back>", shiftTo Prev nonNSP >> moveTo Prev nonNSP)     -- Shifts focused window to previous workspace
-        , ("M-h", moveTo Prev nonNSP)                                       -- Move to the previous workspace
-        , ("M-l", moveTo Next nonNSP)                                       -- Move to the next workspace
-        , ("M-S-l", shiftTo Next nonNSP >> moveTo Next nonNSP)              -- Shifts focused window to next workspace
-        , ("M-S-h", shiftTo Prev nonNSP >> moveTo Prev nonNSP)              -- Shifts focused window to previous workspace
 
     -- Scratchpads
         , ("M-M1-<Return>", namedScratchpadAction myScratchPads "terminal")
-        , ("M-M1-d", namedScratchpadAction myScratchPads "taskell")
-        , ("M-M1-c", namedScratchpadAction myScratchPads "cmus")
         , ("M-C-<Return>", namedScratchpadAction myScratchPads "vifm")
-        , ("M-M1-s", namedScratchpadAction myScratchPads "htop")
+        , ("M-M1-c", namedScratchpadAction myScratchPads "cmus")
+        , ("M-M1-h", namedScratchpadAction myScratchPads "htop")
         , ("M-M1-g", namedScratchpadAction myScratchPads "gotop")
         
     -- Terminal
@@ -181,25 +180,21 @@ myKeys =
         , ("M-S-<Return>", shellPrompt myXPConfig) --Shell Prompt
     -- Dmenu 
     --    , ("M-S-<Return>", spawn ("dmenu_run" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --dmenu_run
-        , ("M-C-i", spawn ("networkmanager_dmenu" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --NetworkManager
+        , ("M-M1-i", spawn ("networkmanager_dmenu" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --NetworkManager
 
     ---Programs
         , ("M-<Print>", spawn ("scrot -zq 100 -e 'mv $f ~/images/shots'"))
         , ("M-S-<Print>", spawn ("scrot -sq 100 -e 'mv $f ~/images/shots'"))
-        , ("M-C-b", spawn ("$HOME/.local/bin/bmark"))
-        , ("M-C-d", spawn (myTerminal ++ " -e taskell"))
-        , ("M-C-w", spawn ("qutebrowser"))
-        , ("M-C-e", spawn ("emacs"))
-        , ("M-C-f", spawn (myTerminal ++ " -e vifm"))
-        , ("M-C-n", spawn (myTerminal ++ " -e newsboat"))
-        , ("M-C-c", spawn (myTerminal ++ " -e cmus"))
-        , ("M-C-p", spawn ("passmenu"))
-        , ("M-C-m", spawn (myTerminal ++ " -e neomutt"))
-        , ("M-C-q", spawn ("transmission-gtk"))
-        , ("M-C-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
-        , ("M-C-g", spawn (myTerminal ++ " -e ghci"))
-        , ("M-C-y", spawn ("killall -q xcompmgr"))
-        , ("M-C-Y", spawn ("xcompmgr"))
+        , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
+        , ("M-M1-w", spawn ("qutebrowser"))
+        , ("M-M1-e", spawn ("emacs"))
+        , ("M-M1-f", spawn (myTerminal ++ " -e vifm"))
+        , ("M-M1-n", spawn (myTerminal ++ " -e newsboat"))
+        , ("M-M1-p", spawn ("passmenu"))
+        , ("M-M1-m", spawn (myTerminal ++ " -e neomutt"))
+        , ("M-M1-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
+        , ("M-M1-t", spawn ("xcompmgr"))
+        , ("M-C-t", spawn ("killall -q xcompmgr"))
 
     -- Keyboard Layouts
         , ("M-M1-1", spawn ("setxkbmap us -variant altgr-intl && $HOME/.local/bin/keybind")) -- Set default keymap
