@@ -205,8 +205,7 @@ myKeys =
         , ("M-<KP_Down>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%") --Pulseaudio Controls
         , ("M-<KP_Up>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
         , ("M-<KP_End>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        , ("M-<KP_Prior>", spawn "pactl set-sink-mute 0 toggle")
-        , ("M-<KP_Next>", spawn "pactl set-sink-mute 1 toggle")
+        , ("M-<KP_Home>", spawn "pactl set-sink-mute 0 toggle ; pactl set-sink-mute 1 toggle")
         , ("M-<KP_Begin>", spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
 
         , ("<M-M1-<Down>", spawn "cmus-remote -u") --Music Player Controls
