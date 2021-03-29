@@ -26,7 +26,7 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # ALIASES
-alias md='sudo mount /dev/sdc1 /mnt'
+alias md='sudo mount /dev/sdd1 /mnt'
 alias umd='sudo umount /mnt'
 alias ls='ls --color=auto'
 alias li='ls -1sh --color=auto'

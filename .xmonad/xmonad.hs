@@ -230,15 +230,15 @@ xmobarEscape = concatMap doubleLts
         doubleLts x   = [x]
 
 mySpaces = [
-         "1: \xf07b ", --System
+         "1: \xf518 ", --Read
          "2: \xf0ac ", --Web
-         "3: \xf02d ", --Read
-         "4: \xf0f4 ", --Extra
-         "5: \xf1fa ", --Chat
+         "3: \xf143 ", --RSS
+         "4: \xf0f4 ", --Emacs
+         "5: \xf1fa ", --Social
          "6: \xf11b ", --Game
          "7: \xf144 ", --Video
-         "8: \xf001 ", --Music
-         "9: \xf019 "  --Sync
+         "8: \xf07b ", --System
+         "9: \xf15c "  --Extra
            ] -- Using Font Awesome
 
 myWorkspaces :: [String]   
@@ -255,11 +255,12 @@ myManageHook = composeAll
 -- -- 'className' as used below.
 
      [
-        className =? "Brave-browser"     --> doShift (mySpaces !! 1)
-      , className =? "qutebrowser"       --> doShift (mySpaces !! 1)
+        className =? "qutebrowser"       --> doShift (mySpaces !! 0)
+      , className =? "Brave-browser"     --> doShift (mySpaces !! 1)
       , title =? "newsboat"              --> doShift (mySpaces !! 2)
       , className =? "Emacs"             --> viewShift (mySpaces !! 3)
       , className =? "Zulip"             --> doShift (mySpaces !! 4)
+      , className =? "zoom"              --> doShift (mySpaces !! 4)
       , title =? "neomutt"               --> doShift (mySpaces !! 4)
       , className =? "discord"           --> doShift (mySpaces !! 4)
       , className =? "TelegramDesktop"   --> doShift (mySpaces !! 4)
