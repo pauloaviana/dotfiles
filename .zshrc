@@ -38,7 +38,7 @@ alias cc='calcurse'
 alias nb='newsboat'
 alias v='nvim'
 alias makepkg='makepkg -si'
-alias vf='vifm'
+alias f='vifm .'
 alias ka='killall'
 alias ..='cd ..'
 alias yt='youtube-dl $argv'
@@ -49,7 +49,6 @@ alias mv="mv -i"
 alias lc="locate"
 alias tarx="tar -xvf"
 alias ps="procs"
-alias tsk="taskell ~/.config/taskell/taskell.md"
 alias xmd="nvim ~/.xmonad/xmonad.hs"
 alias zshrc="nvim ~/.zshrc"
 alias rss="nvim ~/.newsboat/urls"
@@ -59,15 +58,8 @@ alias xmdr="xmonad --recompile"
 alias tq="torque"
 alias g="git"
 alias xmb="nvim ~/.config/xmobar/xmobarrc"
-
-# fff CD on Exit
-f() {
-    fff "$@"
-    cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
-}
-
-# Set fff bookmarks
-# export FFF_FAV[1-9]=$PATH_TO_FILE
+alias site="cabal new-run site"
+alias rsc="rsync --checksum"
 
 # vi mode
 bindkey -v
@@ -86,3 +78,4 @@ bindkey -v '^?' backward-delete-char
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f "/home/paulo/.ghcup/env" ] && source "/home/paulo/.ghcup/env" # ghcup-env
