@@ -8,7 +8,7 @@ export TERMINAL="st"
 export EDITOR="nvim"
 export BROWSER="qutebrowser"
 
-export PATH="$HOME/.emacs.d/bin/doom:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.emacs.d/bin/:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$HOME/.local/private:$PATH"
  
 # PASS
 export PASSWORD_STORE_CLIP_TIME=10
@@ -60,6 +60,8 @@ alias g="git"
 alias xmb="nvim ~/.config/xmobar/xmobarrc"
 alias site="cabal new-run site"
 alias rsc="rsync --checksum"
+alias rsync="rsync -v"
+alias rsu="rsync -vur"
 
 # vi mode
 bindkey -v
@@ -78,4 +80,4 @@ bindkey -v '^?' backward-delete-char
 # Load zsh-syntax-highlighting; should be last.
 source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -f "/home/paulo/.ghcup/env" ] && source "/home/paulo/.ghcup/env" # ghcup-env
+# [ -f "/home/paulo/.ghcup/env" ] && source "/home/paulo/.ghcup/env" # ghcup-env
