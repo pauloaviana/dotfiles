@@ -30,6 +30,7 @@ alias gpa='git remote | xargs -L1 git push --all'
 alias md='sudo mount /dev/sdd1 /mnt'
 alias umd='sudo umount /mnt'
 alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
 alias li='ls -1sh --color=auto'
 alias la='ls -a --color=auto'
 alias cp='cp -iv'
@@ -43,7 +44,7 @@ alias ka='killall'
 alias ..='cd ..'
 alias yt='youtube-dl $argv'
 alias yta='youtube-dl --add-metadata -i -x --audio-format flac'
-alias c="bat"
+alias cat="bat"
 alias rm="rm -i"
 alias mv="mv -i"
 alias lc="locate"
@@ -62,6 +63,10 @@ alias site="cabal new-run site"
 alias rsc="rsync --checksum"
 alias rsync="rsync -v"
 alias rsu="rsync -vur"
+alias doas="doas -- "
+# Nix Aliases
+alias nix-ls="nix-env --list-generations"
+alias revhash="nix-hash --to-base32 --type sha256 "
 
 # vi mode
 bindkey -v
@@ -81,3 +86,4 @@ bindkey -v '^?' backward-delete-char
 source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
 source $HOME/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # [ -f "/home/paulo/.ghcup/env" ] && source "/home/paulo/.ghcup/env" # ghcup-env
+if [ -e /home/paulo/.nix-profile/etc/profile.d/nix.sh ]; then . /home/paulo/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

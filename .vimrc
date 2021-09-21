@@ -36,7 +36,7 @@ set expandtab
 set nobackup
 
 " Set line numbers
-:set number
+":set number
 syntax on
 
 " Set cursor line

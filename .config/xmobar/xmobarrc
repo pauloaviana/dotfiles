@@ -32,7 +32,7 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#b37d51><fn=1> </fn>%arch%</fc> <fc=#b37d51>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#6EA2E2><fn=1> </fn>%default:Master%</fc>   <fc=#4C95E3><fn=1> </fn>%cpu%</fc>   <fc=#90B2E7><fn=1> </fn>%memory%</fc>   <fc=#4C95E3><fn=1> </fn>%disku%</fc>   <fc=#90B2E7><fn=1> </fn>%enp2s0%</fc>   <fc=#c6e2f4>%date%</fc>  "
+       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C9A374><fn=1> </fn>%arch%</fc> <fc=#C9A374>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#A0A099><fn=1> </fn>%default:Master%</fc>   <fc=#978D6C><fn=1> </fn>%cpu%</fc>   <fc=#C9A374><fn=1> </fn>%memory%</fc>   <fc=#A0A099><fn=1> </fn>%disku%</fc>   <fc=#7B817E><fn=1> </fn>%enp2s0%</fc>   <fc=#e4e1ce>%date%</fc>  "
        }
 
 -- To call a .xpm file, use <icon=$FILE_NAME.xpm/>

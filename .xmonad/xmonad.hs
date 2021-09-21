@@ -108,7 +108,6 @@ myStartupHook = do
           spawnOnce "redshift -P -O 4500k"
           spawnOnce "transmission-daemon"
           spawnOnce "$HOME/.local/bin/keybind"
-          spawnOnce "emacs --daemon"
           spawnOnce "xset s off -dpms"
 
 ------------------------------------------------------------------------
@@ -262,7 +261,7 @@ myManageHook = composeAll
       , className =? "Zulip"             --> doShift (mySpaces !! 4)
       , className =? "zoom"              --> doShift (mySpaces !! 4)
       , title =? "neomutt"               --> doShift (mySpaces !! 4)
-      , className =? "discord"           --> doShift (mySpaces !! 4)
+      , className =? "element"           --> doShift (mySpaces !! 4)
       , className =? "TelegramDesktop"   --> doShift (mySpaces !! 4)
       , className =? "Steam"             --> doShift (mySpaces !! 5)
       , className =? "mpv"               --> viewShift (mySpaces !! 6)
