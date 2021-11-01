@@ -1,11 +1,21 @@
 #!/bin/sh
 
-## Set Browser to open bookmarks
-export BROWSER="qutebrowser"
+## Limit of lines
+LIM=30
+## Zathura's bookmarks path
+ZPATH=$HOME/.local/share/zathura/bookmarks
 
-## Lists all tags and pipe them into dmenu
-TAGS="$( buku --np -t | awk 'gsub( /\(|\)$/, "" ) { $1 = $NF; $NF = ""; print }' | dmenu -i -p 'Select tag:' | awk '{print $NF}' )"
+## Lists all the bookmarked files and prints the chosen file
+FILE="$( grep -e '\[' $ZPATH | awk -F / '{gsub("]","");  print $NF }' | dmenu -i -l $LIM -p 'FILE:' )"
+
+## Path to the chosen file
+FILEPATH="$( grep -e "$FILE" $ZPATH | cut -d "[" -f 2  | cut -d "]" -f 1 )"
+## An impromptu way to deal with parenthesis and commas
+NFILE="$( echo $FILE | cut -d "(" -f 1 | cut -d "," -f 2 )"
  
-## Chosen a tag, lists all BookMarks in dmenu with that tag and open the output
-BM="$( buku -p -f 5 | awk -v tags="$TAGS" '$NF ~ tags {$NF=""; print $0}' | dmenu -i -l 30 -p 'Select bookmark' | cut -d ' ' -f 1 | setsid --fork nohup xargs -r buku -o > /dev/null )" 
+## List name of the bookmarks in a human readable form
+BNAME="$( awk -v file="$NFILE" 'x==1 {print $1} $0 ~ file {x=1} ' $ZPATH | awk '/\[/ {exit} NF {print}' | cut -d "=" -f 1 | dmenu -i -l $LIM -p 'BOOKMARK:' )"
+
+## Open Bookmark in Zathura
+setsid --fork zathura "$FILEPATH" -b $BNAME
 

@@ -2,15 +2,12 @@
 
 # My change on the US-International keyboard Layout
 
-# Maps the Menu key to Left Super
-xmodmap -e 'keycode 135 = Super_L'
+# Maps Caps Lock key to the Menu key
+xmodmap -e 'keycode 135 = Caps_Lock'
 
-# Maps Escape to Caps_Lock and remove the lock modifier from Caps_Lock
+# Maps Escape to Caps Lock and remove the lock modifier from it
 xmodmap -e 'keycode 66 = Escape'
 xmodmap -e 'clear Lock'
 
-# Maps Caps Lock to Scroll Lock
-xmodmap -e 'keycode 78 = Caps_Lock'
-
-# Maps Pause to Space
-xmodmap -e 'keycode 127 = space'
+# Adds control functionality to Escape
+xmodmap -e 'add control = Escape'
