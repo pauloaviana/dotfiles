@@ -188,12 +188,15 @@
 ;; Set Org-Agenda
 (setq org-agenda-files
       '("~/documents/org/agenda.org"
+        "~/documents/org/anniversaries.org"
         "~/documents/org/habits.org"))
-
+; Set agenda-view to 2 weeks
+(setq org-agenda-span 14)
+; Setting org-habits
 (require 'org-habit)
 (add-to-list 'org-modules 'org-habit)
 (setq org-habit-graph-column 60)
-
+; Extra stuff
 (setq org-agenda-start-with-log-mode t)
 (setq org-log-done 'time)
 (setq org-log-into-drawer t)
@@ -243,6 +246,44 @@
       ("m" "Metrics Capture")
       ("mw" "Weight" table-line (file+headline "~/documents/org/metrics.org" "Weight")
        "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
+; Include diary for holidays and anniversaries
+(setq org-agenda-include-diary t)
+; Orthodox Feasts
+(eval-after-load 'calendar
+  '(load "~/work/emacs/orthodox-feasts.el" t t))
+
+; Org Babel
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (lisp . t)
+    (haskell . t)
+    (latex . t)
+    (C . t)
+    (R . t)
+    (makefile . t)
+    (shell . t)
+    (awk . t)))
+(setq org-confirm-babel-evaluate nil)
+
+;; Projectile
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/work")
+    (setq projectile-project-search-path '("~/work")))
+  (setq projectile-switch-project-action #'projectile-dired))
+; Counsel-Projectile Integration
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
+;; Load Magit
+(use-package magit
+  :custom
+  (magit-display-buffer #'magit-display-buffer-same-window-except-diff-v1))
 
 
 
@@ -254,7 +295,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(visual-fill-column org-bullets evil-collection evil general helpful which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy-rich counsel command-log-mode use-package)))
+   '(evil-magit magit counsel-projectile projectile visual-fill-column org-bullets evil-collection evil general helpful which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy-rich counsel command-log-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
