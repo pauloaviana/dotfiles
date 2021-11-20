@@ -11,9 +11,19 @@
 ;; Set font
 ; (set-face-attribute 'default nil :font "Font Name" :height x)
 
+;; Startup time
+;; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 50 1000 1000))
 
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(defun personal/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                     (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'personal/display-startup-time)
+
 ;; Initialize package sources
 (require 'package)
 
@@ -32,8 +42,13 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Command log
-(use-package command-log-mode)
+;; No Littering
+; setting cache directory
+(setq user-emacs-directory "~/.cache/emacs")
+(use-package no-littering)
+; Set autosave files in the same path
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;; Set line and column numbering
 (global-display-line-numbers-mode t)
@@ -45,6 +60,8 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Counsel
 (use-package counsel
@@ -73,7 +90,22 @@
   (ivy-mode 1))
 ;; Set Ivy Rich
 (use-package ivy-rich
+  :after ivy
   :init (ivy-rich-mode 1))
+;; Ivy Prescient - sort by frequency
+(use-package ivy-prescient
+  :after counsel
+  :custom
+  (ivy-prescient-enable-filtering nil)
+  :config
+  (prescient-persist-mode 1)
+  (ivy-prescient-mode 1))
+
+;; UI config
+;; Command log
+(use-package command-log-mode
+  :commands command-log-mode)
+
 ;; Set all-icons -- Run M-x all-the-icons-install-fonts
 (use-package all-the-icons)
 ;; Set Modeline
@@ -83,6 +115,7 @@
 ;; Load Theme
 (use-package doom-themes
   :init (load-theme 'doom-oceanic-next t))
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 ;; Set Transparency
@@ -90,12 +123,14 @@
 (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 ;; Set which-key
 (use-package which-key
-  :init (which-key-mode)
+  :defer 0 
   :diminish which-key-mode
   :config
+  (which-key-mode)
   (setq which-key-idle-delay 0.9))
 ;; Use helpful
 (use-package helpful
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
@@ -115,9 +150,11 @@
   (personal/leader-keys
     "a" '(org-agenda :which-key "agenda")
     "t"  '(:ignore t :which-key "toggles")
+    "fc" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/init.el")))
     "tt" '(counsel-load-theme :which-key "choose theme")))
 (general-define-key
  "C-c p" 'check-parens
+ "C-c s" 'completion-at-point
  "C-c t" 'counsel-org-tag
  "C-c b" 'org-toggle-checkbox
  "C-c c" 'calendar
@@ -146,7 +183,8 @@
   :config
   (evil-collection-init))
 ;; Setting Hydra
-;(use-package hydra)
+;(use-package hydra
+;  :defer t)
 ;
 ;(defhydra hydra-text-scale
 ;  "scale text"
@@ -182,6 +220,8 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 ; Calling Org
 (use-package org
+  :pin org
+  :commands (org-capture org-agenda)
   :hook (org-mode . personal/org-mode-setup)
   :config (setq org-ellipsis " ▼ ")
   (personal/org-font-setup))
@@ -189,6 +229,8 @@
 (setq org-agenda-files
       '("~/documents/org/agenda.org"
         "~/documents/org/anniversaries.org"
+        "~/documents/org/appointments.org"
+        "~/documents/org/tasks.org"
         "~/documents/org/habits.org"))
 ; Set agenda-view to 2 weeks
 (setq org-agenda-span 14)
@@ -208,7 +250,6 @@
   (org-map-entries 'org-archive-subtree "/DONE" 'file))
 ; Set level bullets
 (use-package org-bullets
-  :after org
   :hook (org-mode . org-bullets-mode)
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
@@ -250,21 +291,32 @@
 (setq org-agenda-include-diary t)
 ; Orthodox Feasts
 (eval-after-load 'calendar
-  '(load "~/work/emacs/orthodox-feasts.el" t t))
+  '(load "~/code/emacs-lisp/orthodox-feasts.el" t t))
 
 ; Org Babel
-(org-babel-do-load-languages
-  'org-babel-load-languages
-  '((emacs-lisp . t)
-    (lisp . t)
-    (haskell . t)
-    (latex . t)
-    (C . t)
-    (R . t)
-    (makefile . t)
-    (shell . t)
-    (awk . t)))
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (lisp . t)
+     (haskell . t)
+     (latex . t)
+     (python . t)
+     (C . t)
+     (R . t)
+     (makefile . t)
+     (shell . t)
+     (awk . t))))
 (setq org-confirm-babel-evaluate nil)
+
+;; Org tempo
+(with-eval-after-load 'org
+  ;; This is needed as of Org 9.2
+  (require 'org-tempo)
+
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 ;; Projectile
 (use-package projectile
@@ -279,13 +331,109 @@
   (setq projectile-switch-project-action #'projectile-dired))
 ; Counsel-Projectile Integration
 (use-package counsel-projectile
+  :after projectile
   :config (counsel-projectile-mode))
 ;; Load Magit
 (use-package magit
+  :commands magit-status
   :custom
   (magit-display-buffer #'magit-display-buffer-same-window-except-diff-v1))
+; Use Forge
+;(use-package forge
+;  :after magit)
 
+;; Using lsp-mode
+(defun personal/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
 
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . personal/lsp-mode-setup)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+;; LaTeX lsp
+(use-package lsp-latex
+  :after lsp)
+(setq lsp-latex-texlab-executable "~/.nix-profile/bin/texlab")
+(with-eval-after-load "tex-mode"
+ (add-hook 'tex-mode-hook 'lsp)
+ (add-hook 'latex-mode-hook 'lsp))
+;; for bibtex
+(with-eval-after-load "bibtex"
+ (add-hook 'bibtex-mode-hook 'lsp))
+;; Common Lisp lsp
+(use-package sly
+  :mode "\\.lisp\\'")
+(use-package slime
+  :mode "\\.lisp\\'")
+(setq inferior-lisp-program "sbcl")
+;;; Haskell lsp
+;(use-package lsp-haskell)
+;;; Setting hooks to trigger LSP setup and set the server PATH
+;(add-hook 'haskell-mode-hook #'lsp)
+;(add-hook 'haskell-literate-mode-hook #'lsp)
+;(setq lsp-haskell-server-path "~/.nix-profile/bin/haskell-language-server")
+;; C/C++ lsp
+;(use-package ccls
+;  :hook lsp c-mode c++-mode objc-mode)
+;(setq ccls-executable "~/.nix-profile/bin/ccls")
+
+;; Company
+(use-package company
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 3)
+  (company-idle-delay 0.5))
+;; Flycheck 
+(use-package flycheck
+  :hook lsp-mode)
+(use-package smartparens
+;  :hook prog-mode
+  :custom smartparens-global-mode t)
+
+; Give term more colours!
+(use-package eterm-256color
+  :hook (term-mode . eterm-256color-mode))
+ 
+;; File Management
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-single-up-directory
+    "l" 'dired-single-buffer))
+;; Dired Single
+(use-package dired-single
+  :commands (dired dired-jump))
+;; Dired Icons
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+;; Dired Open
+(use-package dired-open
+  :commands (dired dired-jump)
+  :config
+  ;; Doesn't work as expected!
+  ;;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+  (setq dired-open-extensions '(("png" . "sxiv")("jpg" . "sxiv")("jpeg" . "sxiv")("gif" . "sxiv")("xmp" . "sxiv")
+				("ps" . "zathura")("eps" . "zathura")("pdf" . "zathura")("djvu" . "zathura")
+				("avi" . "mpv")("mp4" . "mpv")("wmv" . "mpv")("mpg" . "mpv")("mpeg" . "mpv")("mov" . "mpv")("webm" . "mpv")("mkv" . "mpv"))))
+;; Hide dotfiles
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
 
 
 
@@ -295,10 +443,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(evil-magit magit counsel-projectile projectile visual-fill-column org-bullets evil-collection evil general helpful which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy-rich counsel command-log-mode use-package)))
+   '(python-mode ivy-prescient no-littering dired-hide-dotfiles dired-open all-the-icons-dired dired-single eterm-256color smartparens flycheck ccls company lsp-latex sly slime lsp-haskell haskell-mode lsp-mode evil-magit magit counsel-projectile projectile visual-fill-column org-bullets evil-collection evil general helpful which-key rainbow-delimiters doom-themes doom-modeline all-the-icons ivy-rich counsel command-log-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Make gc pauses faster by decreasing the threshold.
+(setq gc-cons-threshold (* 2 1000 1000))

@@ -45,6 +45,7 @@ alias ..='cd ..'
 alias yt='youtube-dl $argv'
 alias yta='youtube-dl --add-metadata -i -x --audio-format flac'
 alias c="bat"
+alias em="emacsclient -nw -c -a 'emacs'"
 alias rm="rm -i"
 alias mv="mv -i"
 alias lc="locate"

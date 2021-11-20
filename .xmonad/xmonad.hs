@@ -109,6 +109,7 @@ myStartupHook = do
           spawnOnce "transmission-daemon"
           spawnOnce "$HOME/.local/bin/keybind"
           spawnOnce "xset s off -dpms"
+          spawnOnce "/usr/bin/emacs --daemon &"
 
 ------------------------------------------------------------------------
 ---KEYBINDINGS
@@ -171,8 +172,6 @@ myKeys =
         , ("M-M1-<Return>", namedScratchpadAction myScratchPads "terminal")
         , ("M-C-<Return>", namedScratchpadAction myScratchPads "vifm")
         , ("M-M1-c", namedScratchpadAction myScratchPads "cmus")
-        , ("M-M1-h", namedScratchpadAction myScratchPads "htop")
-        , ("M-M1-g", namedScratchpadAction myScratchPads "gotop")
         
     -- Terminal
         , ("M-<Return>", spawn myTerminal)
@@ -186,7 +185,7 @@ myKeys =
         , ("M-S-<Print>", spawn ("scrot -sq 100 -e 'mv $f ~/images/shots'"))
         , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
         , ("M-M1-w", spawn ("qutebrowser"))
-        , ("M-M1-e", spawn ("emacs"))
+        , ("M-M1-e", spawn ("emacsclient -c -a 'emacs'"))
         , ("M-M1-f", spawn (myTerminal ++ " -e vifm"))
         , ("M-M1-n", spawn (myTerminal ++ " -e newsboat"))
         , ("M-M1-p", spawn ("passmenu"))
@@ -232,7 +231,7 @@ mySpaces = [
          "1: \xf518 ", --Read
          "2: \xf0ac ", --Web
          "3: \xf143 ", --RSS
-         "4: \xf0f4 ", --Emacs
+         "4: \xf0f4 ", --Extra
          "5: \xf1fa ", --Social
          "6: \xf11b ", --Game
          "7: \xf144 ", --Video
@@ -258,6 +257,8 @@ myManageHook = composeAll
       , className =? "Brave-browser"     --> doShift (mySpaces !! 1)
       , title =? "newsboat"              --> doShift (mySpaces !! 2)
       , className =? "Zulip"             --> doShift (mySpaces !! 4)
+      , className =? "discord"           --> doShift (mySpaces !! 4)
+      , className =? "Element"           --> doShift (mySpaces !! 4)
       , className =? "zoom"              --> doShift (mySpaces !! 4)
       , title =? "neomutt"               --> doShift (mySpaces !! 4)
       , className =? "TelegramDesktop"   --> doShift (mySpaces !! 4)
@@ -299,33 +300,14 @@ mySpacing = spacingRaw
 ---SCRATCHPADS
 
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
-                  NS "taskell" spawnTaskell findTaskell manageTaskell,
                   NS "cmus" spawnCmus findCmus manageCmus,
-                  NS "vifm" spawnVifm findVifm manageVifm,
-                  NS "htop" spawnHtop findHtop manageHtop,
-                  NS "gotop" spawnGotop findGotop manageGotop
+                  NS "vifm" spawnVifm findVifm manageVifm
                 ]
 
     where
     spawnTerm  = myTerminal ++  " -n scratchpad"
     findTerm   = resource =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
-                 where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
-    spawnHtop  = myTerminal ++  " -n scratchpad htop "
-    findHtop   = resource =? "htop"
-    manageHtop = customFloating $ W.RationalRect l t w h
-                 where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
-    spawnTaskell  = myTerminal ++  " -n scratchpad taskell "
-    findTaskell   = resource =? "taskell"
-    manageTaskell = customFloating $ W.RationalRect l t w h
                  where
                  h = 0.9
                  w = 0.9
@@ -342,14 +324,6 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
     spawnVifm  = myTerminal ++  " -n vifm 'vifm' "
     findVifm   = resource =? "vifm"
     manageVifm = customFloating $ W.RationalRect l t w h
-                 where
-                 h = 0.9
-                 w = 0.9
-                 t = 0.95 -h
-                 l = 0.95 -w
-    spawnGotop  = myTerminal ++  " -n scratchpad gotop "
-    findGotop   = resource =? "gotop"
-    manageGotop = customFloating $ W.RationalRect l t w h
                  where
                  h = 0.9
                  w = 0.9
@@ -386,7 +360,7 @@ searx, archwiki, aur, ebay, libgen, nlab, rutracker, wiktionary, hackage :: S.Se
 archwiki = S.searchEngine "ArchWiki" "https://wiki.archlinux.org/index.php?search="
 aur      = S.searchEngine "AUR" "https://aur.archlinux.org/packages/?K="
 ebay     = S.searchEngine "ebay" "https://www.ebay.com/sch/i.html?_nkw="
-libgen   = S.searchEngine "LibGen" "http://libgen.lc/search.php?req="
+libgen   = S.searchEngine "LibGen" "http://gen.lib.rus.ec/search.php?req="
 nlab     = S.searchEngine "NLab" "https://ncatlab.org/nlab/search?query="
 rutracker = S.searchEngine "RuTracker" "https://rutracker.org/forum/tracker.php?nm="
 wiktionary = S.searchEngine "Wiktionary" "https://en.wiktionary.org/w/index.php?search="
