@@ -1,6 +1,7 @@
 #show-read-feeds no
 auto-reload no
 prepopulate-query-feeds yes
+reload-threads 100
 
 #external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 external-url-viewer "urlview"
@@ -18,9 +19,8 @@ bind-key h quit
 bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread
-bind-key D pb-download
+bind-key x pb-download
 bind-key U show-urls
-bind-key x pb-delete
 bind-key s sort
 bind-key S rev-sort
 

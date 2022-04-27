@@ -70,12 +70,13 @@ settings:
     '*://*.searx.tuxcloud.net/*': true
     '*://*.settings/*': true
     '*://*.videos.lukesmith.xyz/*': true
+    '*://*.www.lotuseaters.com/*': true
     '*://*.www.protondb.com/*': true
     '*://*.www.reddit.com/*': true
     '*://*.www.youtube.com/*': true
     '*://*.www.zaclys.com/*': false
     global: false
-  content.notifications:
+  content.notifications.enabled:
     https://www.reddit.com: false
   content.webgl:
     global: false

@@ -29,7 +29,7 @@ _comp_options+=(globdots)		# Include hidden files.
 alias gpa='git remote | xargs -L1 git push --all'
 alias md='sudo mount /dev/sdd1 /mnt'
 alias umd='sudo umount /mnt'
-alias ls='ls --color=auto'
+alias ls='ls -l --color=auto'
 alias ll='ls -l --color=auto'
 alias li='ls -1sh --color=auto'
 alias la='ls -a --color=auto'
@@ -43,7 +43,7 @@ alias f='vifm .'
 alias ka='killall'
 alias ..='cd ..'
 alias yt='youtube-dl $argv'
-alias yta='youtube-dl --add-metadata -i -x --audio-format flac'
+alias yta='youtube-dl --add-metadata -i -x --audio-format mp3'
 alias c="bat"
 alias em="emacsclient -nw -c -a 'emacs'"
 alias rm="rm -i"
@@ -68,6 +68,7 @@ alias doas="doas -- "
 # Nix Aliases
 alias nix-ls="nix-env --list-generations"
 alias revhash="nix-hash --to-base32 --type sha256 "
+#alias nix-search="nix search nixpkgs"
 
 # vi mode
 bindkey -v

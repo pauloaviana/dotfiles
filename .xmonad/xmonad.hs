@@ -181,15 +181,14 @@ myKeys =
         , ("M-M1-i", spawn ("networkmanager_dmenu" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --NetworkManager
 
     ---Programs
-        , ("M-<Print>", spawn ("scrot -zq 100 -e 'mv $f ~/images/shots'"))
-        , ("M-S-<Print>", spawn ("scrot -sq 100 -e 'mv $f ~/images/shots'"))
+        , ("M-<Print>", spawn ("scrot -z -q 100 -e 'mv $f ~/images/shots'"))
+        , ("M-S-<Print>", spawn ("scrot -s -q 100 -e 'mv $f ~/images/shots'"))
         , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
         , ("M-M1-w", spawn ("qutebrowser"))
         , ("M-M1-e", spawn ("emacsclient -c -a 'emacs'"))
         , ("M-M1-f", spawn (myTerminal ++ " -e vifm"))
         , ("M-M1-n", spawn (myTerminal ++ " -e newsboat"))
         , ("M-M1-p", spawn ("passmenu"))
-        , ("M-M1-m", spawn (myTerminal ++ " -e neomutt"))
         , ("M-M1-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
         , ("M-M1-t", spawn ("xcompmgr"))
         , ("M-C-t", spawn ("killall -q xcompmgr"))
@@ -228,15 +227,15 @@ xmobarEscape = concatMap doubleLts
         doubleLts x   = [x]
 
 mySpaces = [
-         "1: \xf518 ", --Read
-         "2: \xf0ac ", --Web
-         "3: \xf143 ", --RSS
-         "4: \xf0f4 ", --Extra
-         "5: \xf1fa ", --Social
-         "6: \xf11b ", --Game
-         "7: \xf144 ", --Video
-         "8: \xf07b ", --System
-         "9: \xf15c "  --Extra
+         "1: \xf518 ", --Web/Read
+         "2: \xf0ac ", --Web/Navigate
+         "3: \xf02d ", --Documents/Read
+         "4: \xf0f4 ", --Emacs/Write
+         "5: \xf02e ", --Extra
+         "6: \xf1fa ", --Social
+         "7: \xf144 ", --Video/Full
+         "8: \xf07b ", --Side
+         "9: \xf15c "  --Last
            ] -- Using Font Awesome
 
 myWorkspaces :: [String]   
@@ -254,15 +253,13 @@ myManageHook = composeAll
 
      [
         className =? "qutebrowser"       --> doShift (mySpaces !! 0)
+      , title =? "newsboat"              --> doShift (mySpaces !! 0)
       , className =? "Brave-browser"     --> doShift (mySpaces !! 1)
-      , title =? "newsboat"              --> doShift (mySpaces !! 2)
-      , className =? "Zulip"             --> doShift (mySpaces !! 4)
-      , className =? "discord"           --> doShift (mySpaces !! 4)
-      , className =? "Element"           --> doShift (mySpaces !! 4)
-      , className =? "zoom"              --> doShift (mySpaces !! 4)
-      , title =? "neomutt"               --> doShift (mySpaces !! 4)
-      , className =? "TelegramDesktop"   --> doShift (mySpaces !! 4)
-      , className =? "Steam"             --> doShift (mySpaces !! 5)
+      , className =? "Zulip"             --> doShift (mySpaces !! 5)
+      , className =? "discord"           --> doShift (mySpaces !! 5)
+      , className =? "Element"           --> doShift (mySpaces !! 5)
+      , className =? "zoom"              --> doShift (mySpaces !! 5)
+      , className =? "TelegramDesktop"   --> doShift (mySpaces !! 5)
       , className =? "mpv"               --> viewShift (mySpaces !! 6)
      ] <+> namedScratchpadManageHook myScratchPads
         where viewShift = doF . liftM2 (.) W.greedyView W.shift
@@ -305,7 +302,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
                 ]
 
     where
-    spawnTerm  = myTerminal ++  " -n scratchpad"
+    spawnTerm  = myTerminal ++  " -n scratchpad tmux"
     findTerm   = resource =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
                  where
