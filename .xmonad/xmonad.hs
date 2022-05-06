@@ -67,6 +67,7 @@ myTextEditor    = "nvim"
 myBrowser       = "qutebrowser"
 myBorderWidth   = 2        
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+dmenuColor      = " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'"
 
 ------------------------------------------------------------------------
 ---MAIN = DO
@@ -176,22 +177,25 @@ myKeys =
     -- Terminal
         , ("M-<Return>", spawn myTerminal)
         , ("M-S-<Return>", shellPrompt myXPConfig) --Shell Prompt
-    -- Dmenu 
-    --    , ("M-S-<Return>", spawn ("dmenu_run" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --dmenu_run
-        , ("M-M1-i", spawn ("networkmanager_dmenu" ++ " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'")) --NetworkManager
+
+    -- dmenu 
+    --    , ("M-S-<Return>", spawn ("dmenu_run" ++ dmenuColor)) -- dmenu_run
+        , ("M-M1-p", spawn ("passmenu" ++ dmenuColor)) -- Pass
+        , ("M-M1-i", spawn ("networkmanager_dmenu" ++ dmenuColor)) -- NetworkManager
 
     ---Programs
         , ("M-<Print>", spawn ("scrot -z -q 100 -e 'mv $f ~/images/shots'"))
         , ("M-S-<Print>", spawn ("scrot -s -q 100 -e 'mv $f ~/images/shots'"))
-        , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
         , ("M-M1-w", spawn ("qutebrowser"))
         , ("M-M1-e", spawn ("emacsclient -c -a 'emacs'"))
         , ("M-M1-f", spawn (myTerminal ++ " -e vifm"))
         , ("M-M1-n", spawn (myTerminal ++ " -e newsboat"))
-        , ("M-M1-p", spawn ("passmenu"))
-        , ("M-M1-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
         , ("M-M1-t", spawn ("xcompmgr"))
         , ("M-C-t", spawn ("killall -q xcompmgr"))
+
+    ---Scripts
+        , ("M-M1-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
+        , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
 
     -- Keyboard Layouts
         , ("M-M1-1", spawn ("setxkbmap us -variant altgr-intl && $HOME/.local/bin/keybind")) -- Set default keymap
