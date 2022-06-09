@@ -1,8 +1,8 @@
 -- http://projects.haskell.org/xmobar/
 -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
 
-Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting=true, Font Awesome 5 Free Solid:size=11"
-       , additionalFonts = [ "xft:Font Awesome 6 Free Solid:size=9" ] --Required to use the font on the bar regardless of the StdinReader output
+Config { font    = "xft:noto sans:style=Bold:pixelsize=13:antialias=true:hinting=true, Font Awesome 6 Free Solid:size=12"
+       , additionalFonts = [ "xft:Font Awesome 6 Free Solid:size=12" ] --Required to use a font type/size different from StdinReader output
        , bgColor = "#242634"
        , fgColor = "#c6e2f4"
        , position = Top
@@ -12,15 +12,15 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
        , persistent = True
        , iconRoot = "/home/paulo/.config/xmobar/xpm" -- default: "."
        , commands = [ Run Date "%a, %b %d %Y, %H:%M" "date" 10
-                    -- , Run Wireless "wlp3s0" ["-t", "[<quality>]"] 10
-                    , Run Network "enp2s0" ["-t", "[ <rx>|<tx> ]"] 10
-                    , Run Volume "default" "Master" ["-t", "[<volume>%|<volumebar>]"] 2
+                    , Run Network "enp2s0" ["-t", "<fn=1>\xf796</fn> [ <rx>|<tx> ]"] 10
+                    , Run Volume "default" "Master" ["-t", "<fn=1>\xf028</fn> [<volume>%]"] 2
                     , Run Com "/home/paulo/.local/bin/updates-arch.sh" [""] "arch" 3600
                     , Run Com "/home/paulo/.local/bin/updates-arch-aur.sh" [""] "aur" 3600
-                    , Run Cpu ["-t", "[<total>%]","-H","50","--high","red"] 10
-                    , Run Memory ["-t", "[<used>/<total>]"] 10
-                    , Run DiskU [("/", "[<free>]"), ("sdb1", "[<free>]"), ("sdc1", "[<free>]")] [] 3600
+                    , Run Cpu ["-t", " <fn=1>\xf2db</fn> [<total>%]","-H","50","--high","red"] 10
+                    , Run Memory ["-t", " <fn=1>\xf538</fn> [<used>/<total>]"] 10
+                    , Run DiskU [("/", "<fn=1>\xf0a0</fn> [<free>]"), ("sdb1", "[<free>]"), ("sdc1", "[<free>]")] [] 3600
                     , Run UnsafeStdinReader
+--                  , Run Wireless "wlp3s0" ["-t", "<fn=2>\xf1eb</fn> [<quality>]"] 10
 --                  , Run Battery ["-t", "<acstatus>", "--" -- battery specific options
 --                                       -- discharging status
 --                                       , "-o"	, "<icon=battery_off.xpm/> [<left>%] (<timeleft>)"
@@ -32,7 +32,7 @@ Config { font    = "xft:noto sans:style=Bold:pixelsize=12:antialias=true:hinting
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C9A374><fn=1></fn> %arch%</fc> <fc=#C9A374>%aur%</fc> <fc=#d8d5d5>|</fc> <fc=#A0A099><fn=1></fn> %default:Master%</fc>  <fc=#978D6C><fn=1></fn> %cpu%</fc>  <fc=#C9A374><fn=1></fn> %memory%</fc>  <fc=#A0A099><fn=1></fn> %disku%</fc>  <fc=#7B817E><fn=1></fn> %enp2s0%</fc>  <fc=#e4e1ce>%date%</fc>  "
+       , template = "  %UnsafeStdinReader% }{ <fc=#d8d5d5>|</fc> <fc=#C9A374><fn=1></fn> %arch%</fc> <fc=#C9A374>%aur%</fc> <fc=#d8d5d5>|</fc>  <fc=#A0A099>%default:Master%</fc>  <fc=#978D6C>%cpu%</fc>  <fc=#C9A374>%memory%</fc>   <fc=#A0A099>%disku%</fc>   <fc=#7B817E>%enp2s0%</fc>   <fc=#e4e1ce>%date%</fc>  "
        }
 
 -- To call a .xpm file, use <icon=$FILE_NAME.xpm/>

@@ -236,7 +236,7 @@ mySpaces = [
          "3: \xf02d ", --Documents/Read
          "4: \xf0f4 ", --Emacs/Write
          "5: \xf02e ", --Extra
-         "6: \xf1fa ", --Social
+         "6: \xf0e0 ", --Social
          "7: \xf144 ", --Video/Full
          "8: \xf07b ", --Side
          "9: \xf15c "  --Last
@@ -306,7 +306,7 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm,
                 ]
 
     where
-    spawnTerm  = myTerminal ++  " -n scratchpad tmux"
+    spawnTerm  = myTerminal ++  " -n scratchpad"
     findTerm   = resource =? "scratchpad"
     manageTerm = customFloating $ W.RationalRect l t w h
                  where
