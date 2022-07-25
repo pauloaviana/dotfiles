@@ -19,7 +19,9 @@ import XMonad.Util.EZConfig (additionalKeysP) --For parsing keybindigs in a diff
 import XMonad.Util.NamedScratchpad
 
     -- Hooks
-import XMonad.Hooks.DynamicLog (dynamicLogWithPP, defaultPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, pad, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.ManageDocks (manageDocks, avoidStruts, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat) 
 import XMonad.Hooks.EwmhDesktops --Useful with some applications
@@ -66,6 +68,7 @@ myTerminal      = "st"
 myTextEditor    = "nvim"    
 myBrowser       = "qutebrowser"
 myBorderWidth   = 2        
+myTitleWidth    = 135
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 dmenuColor      = " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'"
 
@@ -73,7 +76,7 @@ dmenuColor      = " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ colo
 ---MAIN = DO
 
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 $HOME/.config/xmobar/xmobarrc"
+    xmproc <- spawnPipe ("xmobar -x 0 $HOME/.config/xmobar/xmobarrc")
     xmonad $ ewmh desktopConfig
         { manageHook = ( isFullscreen --> doFullFloat ) <+> myManageHook <+> manageDocks
         , modMask            = myModMask
@@ -81,23 +84,23 @@ main = do
         , startupHook        = myStartupHook
         , layoutHook         = myLayout
         , workspaces         = myWorkspaces
-        , handleEventHook    = handleEventHook desktopConfig <+> fullscreenEventHook
+        , handleEventHook    = handleEventHook . ewmhFullscreen $ desktopConfig 
         , borderWidth        = myBorderWidth
         , normalBorderColor  = color0
         , focusedBorderColor = color2
-        , logHook = dynamicLogWithPP xmobarPP
+        , logHook = dynamicLogWithPP. filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc x                             -- Workspace StOut
                         , ppCurrent = xmobarColor color1  "" . wrap " \xf7a5 " "\xf7a5 "  -- Current workspace in xmobar - Wrap under Font Awesome's grip-lines-vertical
                         , ppVisible = xmobarColor color2 ""                               -- Visible but not current workspace
                         , ppHidden = xmobarColor color2 "" . wrap "" ""                   -- Hidden workspaces in xmobar
                         , ppHiddenNoWindows = xmobarColor color7 ""                       -- Hidden workspaces (no windows)
-                        , ppTitle = xmobarColor color7 "" . shorten 120                   -- Title of active window in xmobar
+                        , ppTitle = xmobarColor color7 "" . shorten myTitleWidth          -- Title of active window in xmobar
                         , ppSep =  xmobarColor color7 "" " | "                            -- Separators in xmobar
                         , ppLayout = xmobarColor color2 ""                                -- Layout name format
                         , ppUrgent = xmobarColor color3 "" . wrap "!" "!"                 -- Urgent workspace
                         , ppExtras  = [windowCount]                                       -- Number of windows in the current workspace
                         , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                      -- Orders xmobar Output
-                        , ppSort = fmap (.namedScratchpadFilterOutWorkspace) $ ppSort xmobarPP -- Hides the 'NSP' workspace created by opening a Scratchpad   
+--                        , ppSort = fmap (.namedScratchpadFilterOutWorkspace) $ ppSort xmobarPP -- Hides the 'NSP' workspace created by opening a Scratchpad   
                         }
         } `additionalKeysP`         myKeys
 
@@ -260,7 +263,6 @@ myManageHook = composeAll
       , title =? "newsboat"              --> doShift (mySpaces !! 0)
       , className =? "Brave-browser"     --> doShift (mySpaces !! 1)
       , className =? "Zulip"             --> doShift (mySpaces !! 5)
-      , className =? "discord"           --> doShift (mySpaces !! 5)
       , className =? "Element"           --> doShift (mySpaces !! 5)
       , className =? "zoom"              --> doShift (mySpaces !! 5)
       , className =? "TelegramDesktop"   --> doShift (mySpaces !! 5)
