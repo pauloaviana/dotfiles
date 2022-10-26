@@ -61,6 +61,7 @@ settings:
     '*://*.gitlab.com/*': true
     '*://*.golem.ph.utexas.edu/*': true
     '*://*.leanprover-community.github.io/*': true
+    '*://*.localhost/*': true
     '*://*.mail.protonmail.com/*': true
     '*://*.mastodon.zaclys.com/*': true
     '*://*.math.stackexchange.com/*': true

@@ -7,8 +7,11 @@ fi
 export TERMINAL="st"
 export EDITOR="nvim"
 export BROWSER="qutebrowser"
+export R_LIBS="$HOME/.local/r/lib/"
+export R_LIBS_USER="$HOME/.local/r/lib/"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-export PATH="$HOME/.emacs.d/bin/:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$HOME/.local/private:$PATH"
+export PATH="$HOME/.dotnet/tools:$HOME/.emacs.d/bin/:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$HOME/.local/private:$PATH"
  
 # PASS
 export PASSWORD_STORE_CLIP_TIME=10
@@ -29,6 +32,7 @@ _comp_options+=(globdots)		# Include hidden files.
 alias gpa='git remote | xargs -L1 git push --all'
 alias md='sudo mount /dev/sdd1 /mnt'
 alias umd='sudo umount /mnt'
+alias ns='nix-shell'
 alias ls='ls -l --color=auto'
 alias ll='ls -l --color=auto'
 alias li='ls -1sh --color=auto'
@@ -68,7 +72,9 @@ alias doas="doas -- "
 # Nix Aliases
 alias nix-ls="nix-env --list-generations"
 alias revhash="nix-hash --to-base32 --type sha256 "
+alias R="R --no-save"
 #alias nix-search="nix search nixpkgs"
+alias lat="words"
 
 # vi mode
 bindkey -v

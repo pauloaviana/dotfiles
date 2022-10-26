@@ -179,10 +179,10 @@ myKeys =
         
     -- Terminal
         , ("M-<Return>", spawn myTerminal)
-        , ("M-S-<Return>", shellPrompt myXPConfig) --Shell Prompt
+--        , ("M-S-<Return>", shellPrompt myXPConfig) --Shell Prompt
 
     -- dmenu 
-    --    , ("M-S-<Return>", spawn ("dmenu_run" ++ dmenuColor)) -- dmenu_run
+        , ("M-S-<Return>", spawn ("dmenu_run" ++ dmenuColor)) -- dmenu_run
         , ("M-M1-p", spawn ("passmenu" ++ dmenuColor)) -- Pass
         , ("M-M1-i", spawn ("networkmanager_dmenu" ++ dmenuColor)) -- NetworkManager
 
