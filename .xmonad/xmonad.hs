@@ -67,8 +67,8 @@ myModMask       = mod4Mask
 myTerminal      = "st"     
 myTextEditor    = "nvim"    
 myBrowser       = "qutebrowser"
-myBorderWidth   = 2        
-myTitleWidth    = 135
+myBorderWidth   = 4        
+myTitleWidth    = 82
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 dmenuColor      = " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'"
 

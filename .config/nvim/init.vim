@@ -44,8 +44,8 @@ set cursorline
 
 " colorscheme onedark
 
-execute pathogen#infect()
-filetype plugin indent on
+" execute pathogen#infect()
+" filetype plugin indent on
 
 "pathogen & Live-Latex auto compile"
 

@@ -1,8 +1,8 @@
 -- http://projects.haskell.org/xmobar/
 -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
 
-Config { font    = "xft:noto sans:style=Bold:pixelsize=13:antialias=true:hinting=true, Font Awesome 6 Free Solid:size=12"
-       , additionalFonts = [ "xft:Font Awesome 6 Free Solid:size=12" ] --Required to use a font type/size different from StdinReader output
+Config { font    = "Noto Sans, Font Awesome 6 Free Solid, 12, Bold 12"
+       , additionalFonts = [ "Font Awesome 6 Free Solid 12" ] --Required to use a font type/size different from StdinReader output
        , bgColor = "#242634"
        , fgColor = "#c6e2f4"
        , position = Top
