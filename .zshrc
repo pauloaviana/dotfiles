@@ -11,7 +11,7 @@ export R_LIBS="$HOME/.local/r/lib/"
 export R_LIBS_USER="$HOME/.local/r/lib/"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-export PATH="$HOME/.dotnet/tools:$HOME/.emacs.d/bin/:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$HOME/.local/private:$PATH"
+export PATH="$HOME/.python/bin:$HOME/.dotnet/tools:$HOME/.emacs.d/bin/:$XDG_DATA_HOME/gem/ruby/2.7.0/bin:$HOME/.elan/bin:$HOME/.local/bin:$HOME/.local/private:$PATH"
  
 # PASS
 export PASSWORD_STORE_CLIP_TIME=10
@@ -33,6 +33,7 @@ alias gpa='git remote | xargs -L1 git push --all'
 alias md='sudo mount /dev/sdd1 /mnt'
 alias umd='sudo umount /mnt'
 alias ns='nix-shell'
+alias tasktui='taskwarrior-tui'
 alias ls='ls -l --color=auto'
 alias ll='ls -l --color=auto'
 alias li='ls -1sh --color=auto'
@@ -46,8 +47,8 @@ alias makepkg='makepkg -si'
 alias f='vifm .'
 alias ka='killall'
 alias ..='cd ..'
-alias yt='youtube-dl $argv'
-alias yta='youtube-dl --add-metadata -i -x --audio-format mp3'
+alias yt='yt-dlp $argv'
+alias yta='yt-dlp --add-metadata -i -x --audio-format mp3'
 alias c="bat"
 alias em="emacsclient -nw -c -a 'emacs'"
 alias rm="rm -i"

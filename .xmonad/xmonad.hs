@@ -68,7 +68,7 @@ myTerminal      = "st"
 myTextEditor    = "nvim"    
 myBrowser       = "qutebrowser"
 myBorderWidth   = 4        
-myTitleWidth    = 82
+myTitleWidth    = 54
 windowCount     = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 dmenuColor      = " -nb '" ++ color0 ++ "' -nf '" ++ color2 ++ "' -sb '" ++ color2 ++ "' -sf '" ++ color7 ++ "'"
 
@@ -141,7 +141,7 @@ myKeys =
         , ("M-S-j", windows W.swapDown)              -- Swap the focused window with the next window
         , ("M-S-k", windows W.swapUp)                -- Swap the focused window with the prev window
         , ("M-m", windows W.focusMaster)             -- Move focus to the master window
-        , ("M-S-s", windows W.swapMaster)            -- Swap the focused window and the master window
+        , ("M-S-a", windows W.swapMaster)            -- Swap the focused window and the master window
         , ("M-<Tab>", promote)                       -- Promote focused window to master, rotating the order
         , ("M-e", rotSlavesDown)           -- Rotate all windows except master and keep focus in place
         , ("M-S-e", rotAllDown)            -- Rotate all the windows in the current stack
@@ -187,8 +187,8 @@ myKeys =
         , ("M-M1-i", spawn ("networkmanager_dmenu" ++ dmenuColor)) -- NetworkManager
 
     ---Programs
-        , ("M-<Print>", spawn ("scrot -z -q 100 -e 'mv $f ~/images/shots'"))
-        , ("M-S-<Print>", spawn ("scrot -s -q 100 -e 'mv $f ~/images/shots'"))
+        , ("M-M1-s", spawn ("scrot -z -q 100 -e 'mv $f ~/images/shots'"))
+        , ("M-S-s", spawn ("scrot -s -q 100 -e 'mv $f ~/images/shots'"))
         , ("M-M1-w", spawn ("qutebrowser"))
         , ("M-M1-e", spawn ("emacsclient -c -a 'emacs'"))
         , ("M-M1-f", spawn (myTerminal ++ " -e vifm"))
@@ -196,19 +196,19 @@ myKeys =
         , ("M-M1-t", spawn ("xcompmgr"))
         , ("M-C-t", spawn ("killall -q xcompmgr"))
 
-    ---Scripts
-        , ("M-M1-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
-        , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
+    ---Scripts [Broken]
+      --  , ("M-M1-s", spawn (myTerminal ++ " $HOME/.local/bin/fzfpdf.sh"))
+      --  , ("M-M1-b", spawn ("$HOME/.local/bin/bmark"))
 
-    -- Keyboard Layouts
+    -- Keyboard Language Layouts
         , ("M-M1-1", spawn ("setxkbmap us -variant altgr-intl && $HOME/.local/bin/keybind")) -- Set default keymap
         , ("M-M1-2", spawn ("setxkbmap ru")) -- Russian
         , ("M-M1-0", spawn ("setxkbmap us -variant altgr-intl")) --US International
 
     -- Multimedia Keys
-        , ("M-<KP_Down>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%") --Pulseaudio Controls
-        , ("M-<KP_Up>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
-        , ("M-<KP_End>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%") --Pulseaudio Controls
+        , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
+        , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
         , ("M-<KP_Home>", spawn "pactl set-sink-mute 0 toggle ; pactl set-sink-mute 1 toggle")
         , ("M-<KP_Begin>", spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
 
